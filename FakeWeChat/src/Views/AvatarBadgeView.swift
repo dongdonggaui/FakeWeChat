@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import SnapKit
+import YYKit
 
 typealias AvatarComposeCompletionHandler = (() -> ())
 
@@ -73,7 +74,9 @@ class AvatarBadgeView: UIView {
                 if currentCount == count {
                     if let composedImage = ImageComposer.composedImage(images, destinationSize: CGSizeMake(CGFloat(50), CGFloat(50)), backgroundColor: UIColor.lightGrayColor()) {
                         self.imageCache.storeImage(composedImage, forKey: cacheKey)
-                        self.avatarImageView.image = composedImage
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.avatarImageView.image = composedImage
+                        })
                     }
                 }
             })
@@ -84,6 +87,6 @@ class AvatarBadgeView: UIView {
     func cacheKeyForPaths(paths: [String]) -> String {
         let sortedPath = paths.sort()
         let key = sortedPath.joinWithSeparator("")
-        return key
+        return key.tq_md5()
     }
 }

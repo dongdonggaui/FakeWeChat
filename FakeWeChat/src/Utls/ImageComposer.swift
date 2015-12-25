@@ -40,7 +40,7 @@ public class ImageComposer: NSObject {
         
         if images.count == 1 {
             let image = images.last!
-            UIGraphicsBeginImageContext(destinationSize)
+            UIGraphicsBeginImageContextWithOptions(destinationSize, true, UIScreen.mainScreen().scale)
             image.drawInRect(CGRectMake(0, 0, destinationSize.width, destinationSize.height))
             let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
@@ -68,13 +68,15 @@ public class ImageComposer: NSObject {
                 let image = images[i]
                 let frame = CGRectFromString(layoutInfos[i])
                 let imageView = UIImageView(frame: frame)
+                imageView.contentMode = .ScaleAspectFill
+                imageView.clipsToBounds = true
                 imageView.tag = 100 + i
                 imageView.image = image
                 snapView!.addSubview(imageView)
             }
         }
         
-        UIGraphicsBeginImageContextWithOptions(destinationSize, true, 0)
+        UIGraphicsBeginImageContextWithOptions(destinationSize, true, UIScreen.mainScreen().scale)
         
         let context = UIGraphicsGetCurrentContext()!
         snapView!.layer.renderInContext(context)

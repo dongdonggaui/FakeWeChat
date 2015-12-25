@@ -16,7 +16,8 @@ class ConversationViewController: BaseViewController, UITableViewDataSource, UIT
         super.viewDidLoad()
 
         self.title = "聊天";
-        self.tableView.rowHeight = 60.0
+        self.tableView.tableFooterView = UIView()
+        self.tableView.estimatedRowHeight = 67
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,7 +42,7 @@ class ConversationViewController: BaseViewController, UITableViewDataSource, UIT
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 60.0
+        return UITableViewAutomaticDimension
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -50,7 +51,19 @@ class ConversationViewController: BaseViewController, UITableViewDataSource, UIT
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         if let avatarView = cell.viewWithTag(1) as? AvatarBadgeView {
-            avatarView.setImagePaths(["http://imgsrc.baidu.com/baike/pic/item/734f12f389d6b5860a46e0cf.jpg", "http://img.315che.com/s/C201/109S/50r4/qths/oLU3/53U2/15.gif"], completion: nil)
+            let path1 = "http://imgsrc.baidu.com/baike/pic/item/734f12f389d6b5860a46e0cf.jpg"
+            let path2 = "http://img.315che.com/s/C201/109S/50r4/qths/oLU3/53U2/15.gif"
+            var paths: [String]
+            if indexPath.row == 0 {
+                paths = [path1]
+            } else if indexPath.row == 1 {
+                paths = [path2]
+            } else if indexPath.row == 2{
+                paths = [path1, path2, path1]
+            } else {
+                paths = [path1, path2]
+            }
+            avatarView.setImagePaths(paths, completion: nil)
         }
     }
 }
