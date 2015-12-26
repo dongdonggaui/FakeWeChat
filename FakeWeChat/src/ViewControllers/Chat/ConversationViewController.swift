@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class ConversationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     

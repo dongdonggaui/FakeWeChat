@@ -9,22 +9,49 @@
 import UIKit
 import SnapKit
 
-class ChatViewController: BaseViewController {
+class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MessageNodeViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let view = TextMessageNodeView()
-        self.view.addSubview(view)
-        view.snp_makeConstraints { (make) -> Void in
-            make.size.equalTo(CGSizeMake(300, 60))
-            make.center.equalTo(self.view)
-        }
+        self.tableView.registerClass(TextMessageTableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Property
+    @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - Table View
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
+        self.configureCell(cell, atIndexPath: indexPath)
+        return cell
+    }
+    
+    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        let textMessageCell = cell as! TextMessageTableViewCell
+        let dice: UInt32 = 100
+        let randomNum = Int(arc4random_uniform(dice)) + 1
+        textMessageCell.textMessageNodeView.textMessage = "message --> \(randomNum)"
+    }
+    
+    // MARK: - MessageViewDelegate
+    func messageViewDidTappedAvatar(messageNodeView: MessageNodeView) {
+        print("tapped")
+    }
+    
+    // MARK: - Event Response
+    @IBAction func selectTapped(sender: UIBarButtonItem) {
+        self.tableView.setEditing(!self.tableView.editing, animated: true)
     }
 
 }

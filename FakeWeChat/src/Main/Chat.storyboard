@@ -133,7 +133,7 @@
             </objects>
             <point key="canvasLocation" x="1902" y="-217"/>
         </scene>
-        <!--Chat View Controller-->
+        <!--Title-->
         <scene sceneID="okv-hA-s1z">
             <objects>
                 <viewController id="rJQ-OU-DBs" customClass="ChatViewController" customModule="FakeWeChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -144,9 +144,36 @@
                     <view key="view" contentMode="scaleToFill" id="pzN-wo-hOk">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zTo-dR-39o">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="rJQ-OU-DBs" id="Mhk-XR-QCY"/>
+                                    <outlet property="delegate" destination="rJQ-OU-DBs" id="nI6-zb-RJH"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zTo-dR-39o" firstAttribute="leading" secondItem="pzN-wo-hOk" secondAttribute="leading" id="6ta-5s-G7N"/>
+                            <constraint firstItem="zGD-Bl-MaB" firstAttribute="top" secondItem="zTo-dR-39o" secondAttribute="bottom" id="Hvg-qp-xkb"/>
+                            <constraint firstAttribute="trailing" secondItem="zTo-dR-39o" secondAttribute="trailing" id="Qug-JJ-oDB"/>
+                            <constraint firstItem="zTo-dR-39o" firstAttribute="top" secondItem="lQd-SF-uzj" secondAttribute="bottom" constant="-64" id="w6P-LF-M5E"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="CiY-7H-9dA">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="MMg-Co-NFA">
+                            <connections>
+                                <action selector="selectTapped:" destination="rJQ-OU-DBs" id="g7Y-Os-d7x"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="zTo-dR-39o" id="QHa-9Q-vCS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vP3-bZ-whe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

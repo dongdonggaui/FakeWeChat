@@ -11,13 +11,15 @@
 		064060081C2E69EE0035F510 /* TextMessageNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064060071C2E69EE0035F510 /* TextMessageNodeView.swift */; };
 		0640600A1C2E7ACD0035F510 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064060091C2E7ACD0035F510 /* ChatViewController.swift */; };
 		0640600C1C2E7E860035F510 /* BubbleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640600B1C2E7E860035F510 /* BubbleTextView.swift */; };
+		0640600E1C2EB3260035F510 /* MessageNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640600D1C2EB3260035F510 /* MessageNodeView.swift */; };
+		064060111C2EDAE10035F510 /* MultiSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064060101C2EDAE10035F510 /* MultiSelectTableViewCell.swift */; };
+		064060131C2EE59F0035F510 /* TextMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064060121C2EE59F0035F510 /* TextMessageTableViewCell.swift */; };
 		095C06E81C2D08D7004D00C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095C06E61C2D08D7004D00C7 /* Main.storyboard */; };
 		095C06EA1C2D08D7004D00C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 095C06E91C2D08D7004D00C7 /* Assets.xcassets */; };
 		095C06ED1C2D08D7004D00C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095C06EB1C2D08D7004D00C7 /* LaunchScreen.storyboard */; };
 		095C06F81C2D08D7004D00C7 /* FakeWeChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C06F71C2D08D7004D00C7 /* FakeWeChatTests.swift */; };
 		095C07031C2D08D7004D00C7 /* FakeWeChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C07021C2D08D7004D00C7 /* FakeWeChatUITests.swift */; };
 		095C07141C2D0AC3004D00C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C07111C2D0AC3004D00C7 /* AppDelegate.swift */; };
-		095C07151C2D0AC3004D00C7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C07131C2D0AC3004D00C7 /* BaseViewController.swift */; };
 		095C07171C2D0B86004D00C7 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095C07161C2D0B86004D00C7 /* Chat.storyboard */; };
 		095C07191C2D0B8D004D00C7 /* Contacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095C07181C2D0B8D004D00C7 /* Contacts.storyboard */; };
 		095C071B1C2D0B94004D00C7 /* Timeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095C071A1C2D0B94004D00C7 /* Timeline.storyboard */; };
@@ -55,6 +57,9 @@
 		064060071C2E69EE0035F510 /* TextMessageNodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMessageNodeView.swift; sourceTree = "<group>"; };
 		064060091C2E7ACD0035F510 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0640600B1C2E7E860035F510 /* BubbleTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTextView.swift; sourceTree = "<group>"; };
+		0640600D1C2EB3260035F510 /* MessageNodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNodeView.swift; sourceTree = "<group>"; };
+		064060101C2EDAE10035F510 /* MultiSelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSelectTableViewCell.swift; sourceTree = "<group>"; };
+		064060121C2EE59F0035F510 /* TextMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMessageTableViewCell.swift; sourceTree = "<group>"; };
 		095C06DF1C2D08D7004D00C7 /* FakeWeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FakeWeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		095C06E71C2D08D7004D00C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		095C06E91C2D08D7004D00C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Assets.xcassets; sourceTree = "<group>"; };
@@ -67,7 +72,6 @@
 		095C07021C2D08D7004D00C7 /* FakeWeChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeWeChatUITests.swift; sourceTree = "<group>"; };
 		095C07041C2D08D7004D00C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		095C07111C2D0AC3004D00C7 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		095C07131C2D0AC3004D00C7 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		095C07161C2D0B86004D00C7 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		095C07181C2D0B8D004D00C7 /* Contacts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Contacts.storyboard; sourceTree = "<group>"; };
 		095C071A1C2D0B94004D00C7 /* Timeline.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Timeline.storyboard; sourceTree = "<group>"; };
@@ -116,6 +120,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0640600F1C2EDAC70035F510 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				064060101C2EDAE10035F510 /* MultiSelectTableViewCell.swift */,
+				064060121C2EE59F0035F510 /* TextMessageTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		095C06D61C2D08D7004D00C7 = {
 			isa = PBXGroup;
 			children = (
@@ -189,7 +202,6 @@
 		095C07121C2D0AC3004D00C7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				095C07131C2D0AC3004D00C7 /* BaseViewController.swift */,
 				095C071E1C2D0D97004D00C7 /* Chat */,
 				095C071F1C2D0D97004D00C7 /* Contacts */,
 				095C07201C2D0D97004D00C7 /* Other */,
@@ -232,8 +244,10 @@
 		095C07241C2D112E004D00C7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0640600F1C2EDAC70035F510 /* Cells */,
 				095C07251C2D1187004D00C7 /* AvatarBadgeView.swift */,
 				095C07271C2D16EA004D00C7 /* BadgeView.swift */,
+				0640600D1C2EB3260035F510 /* MessageNodeView.swift */,
 				064060071C2E69EE0035F510 /* TextMessageNodeView.swift */,
 				0640600B1C2E7E860035F510 /* BubbleTextView.swift */,
 			);
@@ -478,12 +492,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				095C07151C2D0AC3004D00C7 /* BaseViewController.swift in Sources */,
+				064060131C2EE59F0035F510 /* TextMessageTableViewCell.swift in Sources */,
+				0640600E1C2EB3260035F510 /* MessageNodeView.swift in Sources */,
 				095C07281C2D16EA004D00C7 /* BadgeView.swift in Sources */,
 				061937401C2D8CA400639A40 /* TQHelper.swift in Sources */,
 				064060081C2E69EE0035F510 /* TextMessageNodeView.swift in Sources */,
 				095C07261C2D1187004D00C7 /* AvatarBadgeView.swift in Sources */,
 				095C07331C2D1B5B004D00C7 /* WBStatusComposeTextParser.m in Sources */,
+				064060111C2EDAE10035F510 /* MultiSelectTableViewCell.swift in Sources */,
 				095C072B1C2D1A3C004D00C7 /* ImageComposer.swift in Sources */,
 				0640600C1C2E7E860035F510 /* BubbleTextView.swift in Sources */,
 				095C07321C2D1B5B004D00C7 /* WBEmoticonInputView.m in Sources */,
@@ -587,6 +603,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -625,6 +642,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -636,6 +654,8 @@
 			baseConfigurationReference = 49C16CB998C890FBFDC75065 /* Pods-FakeWeChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hengjin Cai (RB8W7G765Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hengjin Cai (RB8W7G765Z)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/AVOSCloudDynamic/**\"",
@@ -651,8 +671,9 @@
 				);
 				INFOPLIST_FILE = FakeWeChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hly.FakeWeChat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hly.fakewechat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "bd45ba5b-4132-43c2-b72c-f2a8c34cf8a2";
 				SWIFT_OBJC_BRIDGING_HEADER = FakeWeChat/src/Main/ocbridge.h;
 			};
 			name = Debug;
@@ -662,6 +683,8 @@
 			baseConfigurationReference = 2DBD7506C823E77277F44EE9 /* Pods-FakeWeChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/AVOSCloudDynamic/**\"",
@@ -677,8 +700,9 @@
 				);
 				INFOPLIST_FILE = FakeWeChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hly.FakeWeChat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hly.fakewechat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "bd45ba5b-4132-43c2-b72c-f2a8c34cf8a2";
 				SWIFT_OBJC_BRIDGING_HEADER = FakeWeChat/src/Main/ocbridge.h;
 			};
 			name = Release;
