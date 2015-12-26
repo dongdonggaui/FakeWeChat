@@ -1,6 +1,10 @@
 PODS:
   - Alamofire (3.1.4)
+  - AVOSCloudDynamic (3.1.7.1)
+  - AVOSCloudIMDynamic (3.1.7.1):
+    - AVOSCloudDynamic
   - Kingfisher (1.8.5)
+  - KVOController (1.0.3)
   - SnapKit (0.18.0)
   - SwiftyJSON (2.3.2)
   - YYKit (0.9.7):
@@ -9,14 +13,20 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.1.4)
+  - AVOSCloudDynamic
+  - AVOSCloudIMDynamic
   - Kingfisher (~> 1.8.5)
+  - KVOController
   - SnapKit (~> 0.18.0)
   - SwiftyJSON (~> 2.3.2)
   - YYKit (~> 0.9.7)
 
 SPEC CHECKSUMS:
   Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
+  AVOSCloudDynamic: 532aa15204f82638c93a6f47f3c91bc18b96304c
+  AVOSCloudIMDynamic: 6c2d176471c8d6423ed8bb8bab1e43dcceadd215
   Kingfisher: 780fed0fa82692a3bd59d53329ae2b85cdd354a5
+  KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
   SnapKit: e1f090a6d47b1dd4bd89b73f72b6746a7835ef3c
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   YYKit: b6b9319f5e6b01784b6a4225cec4c3dcf8f6d249

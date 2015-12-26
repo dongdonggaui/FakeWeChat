@@ -70,14 +70,14 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="485" height="21"/>
                                                                             <animations/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYu-kw-Xx9" userLabel="Time Label">
                                                                             <rect key="frame" x="490" y="3" width="36" height="17"/>
                                                                             <animations/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -87,7 +87,7 @@
                                                                     <rect key="frame" x="0.0" y="26" width="526" height="17"/>
                                                                     <animations/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -133,10 +133,10 @@
             </objects>
             <point key="canvasLocation" x="1902" y="-217"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="okv-hA-s1z">
             <objects>
-                <viewController id="rJQ-OU-DBs" sceneMemberID="viewController">
+                <viewController id="rJQ-OU-DBs" customClass="ChatViewController" customModule="FakeWeChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lQd-SF-uzj"/>
                         <viewControllerLayoutGuide type="bottom" id="zGD-Bl-MaB"/>

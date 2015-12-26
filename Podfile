@@ -9,6 +9,9 @@ target 'FakeWeChat' do
   pod 'Kingfisher', '~> 1.8.5'
   pod 'SwiftyJSON', '~> 2.3.2'
   pod 'SnapKit', '~> 0.18.0'
+  pod 'AVOSCloudDynamic'
+  pod 'AVOSCloudIMDynamic'
+  pod 'KVOController'
 end
 
 target 'FakeWeChatTests' do

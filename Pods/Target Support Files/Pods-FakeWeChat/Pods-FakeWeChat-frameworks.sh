@@ -84,14 +84,20 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${PODS_ROOT}/AVOSCloudDynamic/iOS/release-v3.1.7.1/Dynamic/AVOSCloud.framework"
+  install_framework "${PODS_ROOT}/AVOSCloudIMDynamic/iOS/release-v3.1.7.1/Dynamic/AVOSCloudIM.framework"
   install_framework "Pods-FakeWeChat/Alamofire.framework"
+  install_framework "Pods-FakeWeChat/KVOController.framework"
   install_framework "Pods-FakeWeChat/Kingfisher.framework"
   install_framework "Pods-FakeWeChat/SnapKit.framework"
   install_framework "Pods-FakeWeChat/SwiftyJSON.framework"
   install_framework "Pods-FakeWeChat/YYKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${PODS_ROOT}/AVOSCloudDynamic/iOS/release-v3.1.7.1/Dynamic/AVOSCloud.framework"
+  install_framework "${PODS_ROOT}/AVOSCloudIMDynamic/iOS/release-v3.1.7.1/Dynamic/AVOSCloudIM.framework"
   install_framework "Pods-FakeWeChat/Alamofire.framework"
+  install_framework "Pods-FakeWeChat/KVOController.framework"
   install_framework "Pods-FakeWeChat/Kingfisher.framework"
   install_framework "Pods-FakeWeChat/SnapKit.framework"
   install_framework "Pods-FakeWeChat/SwiftyJSON.framework"

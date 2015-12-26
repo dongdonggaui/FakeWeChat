@@ -11,5 +11,7 @@
 
 #import "WBEmoticonInputView.h"
 #import "WBStatusComposeTextParser.h"
+#import <FBKVOController.h>
+#import <YYKit.h>
 
 #endif /* ocbridge_h */
