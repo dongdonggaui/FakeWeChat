@@ -15,15 +15,15 @@ class BubbleTextView: UIView {
     var textWidth: CGFloat = 0
     var message = "" {
         didSet {
-            self.messageTextView.text = message
-            self.invalidateIntrinsicContentSize()
+            messageTextView.text = message
+            invalidateIntrinsicContentSize()
         }
     }
     let messageBubbleView = UIImageView()
     let messageTextView = UITextView()
     
     deinit {
-        self.KVOController.removeObserver(self, forKeyPath: "frame")
+        KVOController.removeObserver(self, forKeyPath: "frame")
     }
     
     override init(frame: CGRect) {
@@ -33,9 +33,10 @@ class BubbleTextView: UIView {
         messageTextView.textColor = UIColor.blackColor()
         messageTextView.scrollEnabled = false
         messageTextView.editable = false
+        messageTextView.selectable = false
         
-        self.addSubview(messageBubbleView)
-        self.addSubview(messageTextView)
+        addSubview(messageBubbleView)
+        addSubview(messageTextView)
         
         messageBubbleView.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(self)
@@ -45,7 +46,7 @@ class BubbleTextView: UIView {
         }
         
         let options = NSKeyValueObservingOptions([.Old, .New])
-        self.KVOController.observe(self, keyPath: "frame", options: options, context: nil)
+        KVOController.observe(self, keyPath: "frame", options: options, context: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,7 +54,7 @@ class BubbleTextView: UIView {
     }
     
     override func intrinsicContentSize() -> CGSize {
-        var size = (self.message as NSString).sizeForFont(self.messageTextView.font, size: CGSizeMake(self.width - 70, CGFloat.max), mode: NSLineBreakMode.ByWordWrapping)
+        var size = (message as NSString).sizeForFont(messageTextView.font, size: CGSizeMake(width - 70, CGFloat.max), mode: NSLineBreakMode.ByWordWrapping)
         size.width += 20
         size.height += 20
         return size
@@ -65,7 +66,7 @@ class BubbleTextView: UIView {
                 let newValue = (change![NSKeyValueChangeNewKey] as! NSValue).CGRectValue()
                 let oldValue = (change![NSKeyValueChangeOldKey] as! NSValue).CGRectValue()
                 if newValue.width != oldValue.width {
-                    self.invalidateIntrinsicContentSize()
+                    invalidateIntrinsicContentSize()
                 }
             }
         }

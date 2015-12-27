@@ -14,6 +14,7 @@
 		0640600E1C2EB3260035F510 /* MessageNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640600D1C2EB3260035F510 /* MessageNodeView.swift */; };
 		064060111C2EDAE10035F510 /* MultiSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064060101C2EDAE10035F510 /* MultiSelectTableViewCell.swift */; };
 		064060131C2EE59F0035F510 /* TextMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064060121C2EE59F0035F510 /* TextMessageTableViewCell.swift */; };
+		06BF9A8E1C302737005B7B72 /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF9A8D1C302737005B7B72 /* MessageListView.swift */; };
 		095C06E81C2D08D7004D00C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095C06E61C2D08D7004D00C7 /* Main.storyboard */; };
 		095C06EA1C2D08D7004D00C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 095C06E91C2D08D7004D00C7 /* Assets.xcassets */; };
 		095C06ED1C2D08D7004D00C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095C06EB1C2D08D7004D00C7 /* LaunchScreen.storyboard */; };
@@ -60,6 +61,7 @@
 		0640600D1C2EB3260035F510 /* MessageNodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNodeView.swift; sourceTree = "<group>"; };
 		064060101C2EDAE10035F510 /* MultiSelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSelectTableViewCell.swift; sourceTree = "<group>"; };
 		064060121C2EE59F0035F510 /* TextMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMessageTableViewCell.swift; sourceTree = "<group>"; };
+		06BF9A8D1C302737005B7B72 /* MessageListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListView.swift; sourceTree = "<group>"; };
 		095C06DF1C2D08D7004D00C7 /* FakeWeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FakeWeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		095C06E71C2D08D7004D00C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		095C06E91C2D08D7004D00C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Assets.xcassets; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				0640600D1C2EB3260035F510 /* MessageNodeView.swift */,
 				064060071C2E69EE0035F510 /* TextMessageNodeView.swift */,
 				0640600B1C2E7E860035F510 /* BubbleTextView.swift */,
+				06BF9A8D1C302737005B7B72 /* MessageListView.swift */,
 			);
 			name = Views;
 			path = src/Views;
@@ -493,6 +496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				064060131C2EE59F0035F510 /* TextMessageTableViewCell.swift in Sources */,
+				06BF9A8E1C302737005B7B72 /* MessageListView.swift in Sources */,
 				0640600E1C2EB3260035F510 /* MessageNodeView.swift in Sources */,
 				095C07281C2D16EA004D00C7 /* BadgeView.swift in Sources */,
 				061937401C2D8CA400639A40 /* TQHelper.swift in Sources */,

@@ -13,12 +13,19 @@ enum MessageFromType: Int {
     case Outgoing = 2
 }
 
-@objc protocol MessageNodeViewDelegate: NSObjectProtocol {
-    optional func messageViewDidTappedAvatar(messageNodeView: MessageNodeView)
+enum MessageNodeViewFlag: Int {
+    case Avatar = 1
+    case Content = 2
+    case Placeholder = 3
 }
 
-@objc protocol MessageNodeViewProtocol {
-    func messageNodeViewContentView(messageNodeView: MessageNodeView) -> UIView
+enum MessageNodeViewCustomMenuKey: String {
+    case Title = "title"
+    case Action = "action"
+}
+
+@objc protocol MessageNodeViewDelegate: NSObjectProtocol {
+    optional func messageViewDidTappedAvatar(messageNodeView: MessageNodeView)
 }
 
 class MessageNodeView: UIView {
@@ -26,18 +33,71 @@ class MessageNodeView: UIView {
     // MARK: - Properties
     weak var delegate: MessageNodeViewDelegate?
     
-    lazy private var _messageFromType = MessageFromType.Incoming
-    
     let contentStackView = UIStackView()
     
     let avatarView = UIView()
     let avatarButton = UIButton(type: .Custom)
     let avatarImageView = UIImageView()
     
+    // MARK: - Private Properties
+    private var _messageFromType = MessageFromType.Incoming
+    private var _placeholderView = UIView()
+    
     // MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        messageNodeViewInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        messageNodeViewInit()
+    }
+    
+    // MARK: - Menu
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    // MARK: - Event Response
+    private func avatarButtonTapped(sender: UIButton) {
+        if let sDelegate = delegate {
+            if sDelegate.respondsToSelector("messageViewDidTappedAvatar:") {
+                sDelegate.messageViewDidTappedAvatar!(self)
+            }
+        }
+    }
+    
+    func handleLongPressGesture(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .Began {
+            becomeFirstResponder()
+            let menuController = UIMenuController.sharedMenuController()
+            if let customMenuItems = customMenuItems() {
+                var menuItmes: [UIMenuItem] = []
+                for itemInfo in customMenuItems {
+                    let menuItem = UIMenuItem(title: itemInfo[MessageNodeViewCustomMenuKey.Title.rawValue]!, action: Selector(itemInfo[MessageNodeViewCustomMenuKey.Action.rawValue]!))
+                    menuItmes += [menuItem]
+                }
+                menuController.menuItems = menuItmes
+            }
+            let messageView = viewWithTag(MessageNodeViewFlag.Content.rawValue)!
+            menuController.setTargetRect(messageView.frame, inView: contentStackView)
+            menuController.setMenuVisible(true, animated: true)
+        }
+    }
+    
+    // MARK: - Public Methods
+    func contentView() -> UIView {
+        fatalError("contentView() should be override")
+    }
+    
+    func customMenuItems() -> [Dictionary<String, String>]? {
+        return nil
+    }
+    
+    // MARK: - Private Methods
+    private func messageNodeViewInit() {
+        avatarView.tag = MessageNodeViewFlag.Avatar.rawValue
         avatarView.addSubview(avatarImageView)
         avatarView.addSubview(avatarButton)
         avatarImageView.snp_makeConstraints { (make) -> Void in
@@ -52,38 +112,34 @@ class MessageNodeView: UIView {
         avatarButton.addTarget(self, action: "avatarButtonTapped:", forControlEvents: .TouchUpInside)
         
         contentStackView.axis = .Horizontal
-        contentStackView.alignment = .Leading
         contentStackView.distribution = .Fill
-        self.addSubview(contentStackView)
+        contentStackView.spacing = 8
+        
+        addSubview(contentStackView)
         contentStackView.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(self)
         }
         
         let messageView = self.contentView()
+        messageView.tag = MessageNodeViewFlag.Content.rawValue
+        
+        _placeholderView.tag = MessageNodeViewFlag.Placeholder.rawValue
+        _placeholderView.setContentHuggingPriority(UILayoutPriorityDefaultLow, forAxis: .Horizontal)
+        _placeholderView.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, forAxis: .Horizontal)
+        
         contentStackView.addArrangedSubview(avatarView)
         contentStackView.addArrangedSubview(messageView)
+        contentStackView.addArrangedSubview(_placeholderView)
         
-        // for text
+        // menu action
+        let longPress = UILongPressGestureRecognizer(target: self, action: "handleLongPressGesture:")
+        longPress.minimumPressDuration = 1
+        messageView.addGestureRecognizer(longPress)
+        messageView.userInteractionEnabled = true
+        
+        // for test
         avatarView.backgroundColor = UIColor.lightGrayColor()
         messageView.backgroundColor = UIColor.orangeColor()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    // MARK: - Event Response
-    func avatarButtonTapped(sender: UIButton) {
-        if let sDelegate = delegate {
-            if sDelegate.respondsToSelector("messageViewDidTappedAvatar:") {
-                sDelegate.messageViewDidTappedAvatar!(self)
-            }
-        }
-    }
-    
-    // MARK: - Public
-    func contentView() -> UIView {
-        fatalError("contentView() should be override")
     }
     
     // MARK: - Getters & Setters
@@ -93,13 +149,21 @@ class MessageNodeView: UIView {
         }
         set {
             if _messageFromType != newValue {
+                let avatar = viewWithTag(MessageNodeViewFlag.Avatar.rawValue)!
+                let content = viewWithTag(MessageNodeViewFlag.Content.rawValue)!
+                let placeholder = viewWithTag(MessageNodeViewFlag.Placeholder.rawValue)!
+                
                 switch newValue {
                 case .Incoming:
-                    self.contentStackView.removeArrangedSubview(self.contentView())
-                    self.contentStackView.addArrangedSubview(self.contentView())
+                    contentStackView.removeArrangedSubview(content)
+                    contentStackView.addArrangedSubview(content)
+                    contentStackView.removeArrangedSubview(placeholder)
+                    contentStackView.addArrangedSubview(placeholder)
                 case .Outgoing:
-                    self.contentStackView.removeArrangedSubview(self.avatarView)
-                    self.contentStackView.addArrangedSubview(self.avatarView)
+                    contentStackView.removeArrangedSubview(content)
+                    contentStackView.addArrangedSubview(content)
+                    contentStackView.removeArrangedSubview(avatar)
+                    contentStackView.addArrangedSubview(avatar)
                 }
             }
             _messageFromType = newValue

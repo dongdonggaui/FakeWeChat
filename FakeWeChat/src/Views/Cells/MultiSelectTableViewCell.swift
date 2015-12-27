@@ -40,11 +40,17 @@ class MultiSelectTableViewCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        if !self.shouldMultiSelect() {
+            return
+        }
+        
     }
     
-    override func setEditing(editing: Bool, animated: Bool) {        
+    override func setEditing(editing: Bool, animated: Bool) {
+        if !self.shouldMultiSelect() {
+            return
+        }
         let constant = editing ? SelectImageVisibleLeading : SelectImageInVisibleLeading
         self.updateContentStackLeadingConstraint(constant, animated: animated)
     }
@@ -94,9 +100,10 @@ class MultiSelectTableViewCell: UITableViewCell {
             make.top.trailing.bottom.equalTo(self.contentView)
         }
         
+        self.selectionStyle = .None
+        
         // for test
         selectImageView.backgroundColor = UIColor.yellowColor()
-        containerView.backgroundColor = UIColor.cyanColor()
     }
     
     private func updateContentStackLeadingConstraint(constant: CGFloat, animated: Bool) {

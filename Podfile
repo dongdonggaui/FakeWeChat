@@ -12,6 +12,7 @@ target 'FakeWeChat' do
   pod 'KVOController'
   pod 'AVOSCloudIMDynamic'
   pod 'AVOSCloudDynamic'
+  pod 'ChameleonFramework'
 end
 
 target 'FakeWeChatTests' do
