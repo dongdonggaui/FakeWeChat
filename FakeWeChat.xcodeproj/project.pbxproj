@@ -377,6 +377,7 @@
 				TargetAttributes = {
 					095C06DE1C2D08D7004D00C7 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = Z5T9VCP9MW;
 					};
 					095C06F21C2D08D7004D00C7 = {
 						CreatedOnToolsVersion = 7.1;
@@ -673,7 +674,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hly.fakewechat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bd45ba5b-4132-43c2-b72c-f2a8c34cf8a2";
+				PROVISIONING_PROFILE = "a2ea8f7d-37e2-4975-8b57-6a2a2a6e4a2a";
 				SWIFT_OBJC_BRIDGING_HEADER = FakeWeChat/src/Main/ocbridge.h;
 			};
 			name = Debug;
@@ -683,8 +684,8 @@
 			baseConfigurationReference = 2DBD7506C823E77277F44EE9 /* Pods-FakeWeChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hengjin Cai (RB8W7G765Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hengjin Cai (RB8W7G765Z)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/AVOSCloudDynamic/**\"",
@@ -702,7 +703,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hly.fakewechat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bd45ba5b-4132-43c2-b72c-f2a8c34cf8a2";
+				PROVISIONING_PROFILE = "a2ea8f7d-37e2-4975-8b57-6a2a2a6e4a2a";
 				SWIFT_OBJC_BRIDGING_HEADER = FakeWeChat/src/Main/ocbridge.h;
 			};
 			name = Release;

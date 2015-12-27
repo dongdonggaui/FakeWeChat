@@ -77,7 +77,6 @@ class MultiSelectTableViewCell: UITableViewCell {
         
         selectImageView.snp_makeConstraints { (make) -> Void in
             make.size.equalTo(CGSizeMake(20, 20))
-//            make.leading.equalTo(8)
         }
         containerView.snp_makeConstraints { (make) -> Void in
             make.top.bottom.equalTo(contentStackView)
