@@ -15,6 +15,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
 
         self.tableView.registerClass(TextMessageTableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.estimatedRowHeight = 60.0
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +36,10 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {

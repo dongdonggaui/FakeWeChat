@@ -70,12 +70,14 @@ class MultiSelectTableViewCell: UITableViewCell {
         contentStackView.alignment = .Center
         contentStackView.distribution = .Fill
         contentStackView.spacing = 8
+        contentStackView.layoutMargins = UIEdgeInsetsMake(0, 8, 0, 0);
+        contentStackView.layoutMarginsRelativeArrangement = true
         contentStackView.addArrangedSubview(selectImageView)
         contentStackView.addArrangedSubview(containerView)
         
         selectImageView.snp_makeConstraints { (make) -> Void in
             make.size.equalTo(CGSizeMake(20, 20))
-            make.leading.equalTo(8)
+//            make.leading.equalTo(8)
         }
         containerView.snp_makeConstraints { (make) -> Void in
             make.top.bottom.equalTo(contentStackView)
@@ -84,7 +86,7 @@ class MultiSelectTableViewCell: UITableViewCell {
         let multiSelectContentView = self.multiSelectContentView()
         containerView.addSubview(multiSelectContentView)
         multiSelectContentView.snp_makeConstraints { (make) -> Void in
-            make.edges.equalTo(containerView).inset(UIEdgeInsetsMake(0, 10, 5, 10))
+            make.edges.equalTo(containerView).inset(UIEdgeInsetsMake(5, 10, 5, 10))
         }
         
         self.contentView.addSubview(contentStackView)

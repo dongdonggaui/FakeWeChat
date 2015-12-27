@@ -15,9 +15,13 @@ typealias AvatarComposeCompletionHandler = (() -> ())
 
 class AvatarBadgeView: UIView {
     
-    var avatarImageTasks: [RetrieveImageTask] = []
+    // MARK: - Life Cycle
+    override func awakeFromNib() {
+        avatarBadgeViewInit()
+    }
     
-    lazy var imageCache = KingfisherManager.sharedManager.cache
+    // MARK: - Properties
+    private var avatarImageTasks: [RetrieveImageTask] = []
     
     var badgeValue = 0 {
         didSet {
@@ -25,24 +29,19 @@ class AvatarBadgeView: UIView {
         }
     }
     
-    let webImageDownloader = ImageDownloader(name: "\(AvatarBadgeView.self)")
+    var imageSize = CGSizeMake(50, 50)
     
+    let imageCache = KingfisherManager.sharedManager.cache
+    let webImageDownloader = ImageDownloader(name: "\(AvatarBadgeView.self)")
     let avatarImageView = UIImageView()
     let badgeView = BadgeView()
     
-    override func awakeFromNib() {
-        avatarBadgeViewInit()
-    }
-    
-    func avatarBadgeViewInit() {
-        self.addSubview(avatarImageView)
-        self.addSubview(badgeView)
-        avatarImageView.snp_makeConstraints { (make) -> Void in
-            make.edges.equalTo(self)
-        }
-    }
-    
+    // MARK: - Public Methods
     func setImagePaths(paths: [String], placeholder: UIImage?, completion: AvatarComposeCompletionHandler?) {
+        if let sPlaceholder = placeholder {
+            self.avatarImageView.image = sPlaceholder
+        }
+        
         let cacheKey = self.cacheKeyForPaths(paths)
         let cachedResult = self.imageCache.isImageCachedForKey(cacheKey)
         var cachedImage: UIImage? = nil
@@ -65,22 +64,32 @@ class AvatarBadgeView: UIView {
             task.cancel()
         }
         for path in paths {
-            let task = KingfisherManager.sharedManager.retrieveImageWithURL(NSURL(string: path)!, optionsInfo: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
-                if image == nil {
+            let task = KingfisherManager.sharedManager.retrieveImageWithURL(NSURL(string: path)!, optionsInfo: nil, progressBlock: nil, completionHandler: { [weak self](image, error, cacheType, imageURL) -> () in
+                if image == nil || self == nil {
                     return;
                 }
                 images.append(image!)
                 currentCount++
                 if currentCount == count {
-                    if let composedImage = ImageComposer.composedImage(images, destinationSize: CGSizeMake(CGFloat(50), CGFloat(50)), backgroundColor: UIColor.lightGrayColor()) {
-                        self.imageCache.storeImage(composedImage, forKey: cacheKey)
+                    if let composedImage = ImageComposer.composedImage(images, destinationSize: self!.imageSize, backgroundColor: UIColor.lightGrayColor()) {
+                        self!.imageCache.storeImage(composedImage, forKey: cacheKey)
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.avatarImageView.image = composedImage
+                            self!.avatarImageView.image = composedImage
                         })
                     }
                 }
             })
             self.avatarImageTasks += [task]
+        }
+    }
+    
+    // MARK: - Private Methods
+    
+    func avatarBadgeViewInit() {
+        self.addSubview(avatarImageView)
+        self.addSubview(badgeView)
+        avatarImageView.snp_makeConstraints { (make) -> Void in
+            make.edges.equalTo(self)
         }
     }
     

@@ -12,6 +12,12 @@ import SnapKit
 
 class TextMessageNodeView: MessageNodeView {
     
+    // MARK: - Life Cycle
+    // MARK: - Override
+    override func contentView() -> UIView {
+        return _contentView
+    }
+    
     // MARK: - Property
     var textMessage = "" {
         didSet {
@@ -20,8 +26,4 @@ class TextMessageNodeView: MessageNodeView {
     }
     private let _contentView = BubbleTextView()
     
-    // MARK: - Override
-    override func contentView() -> UIView {
-        return _contentView
-    }
 }

@@ -32,6 +32,7 @@ class BubbleTextView: UIView {
         messageTextView.font = UIFont.systemFontOfSize(14)
         messageTextView.textColor = UIColor.blackColor()
         messageTextView.scrollEnabled = false
+        messageTextView.editable = false
         
         self.addSubview(messageBubbleView)
         self.addSubview(messageTextView)
