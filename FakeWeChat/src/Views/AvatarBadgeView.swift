@@ -42,7 +42,7 @@ class AvatarBadgeView: UIView {
         }
     }
     
-    func setImagePaths(paths: [String], completion: AvatarComposeCompletionHandler?) {
+    func setImagePaths(paths: [String], placeholder: UIImage?, completion: AvatarComposeCompletionHandler?) {
         let cacheKey = self.cacheKeyForPaths(paths)
         let cachedResult = self.imageCache.isImageCachedForKey(cacheKey)
         var cachedImage: UIImage? = nil

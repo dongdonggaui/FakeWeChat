@@ -63,7 +63,7 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
             } else {
                 paths = [path1, path2]
             }
-            avatarView.setImagePaths(paths, completion: nil)
+            avatarView.setImagePaths(paths, placeholder: nil, completion: nil)
         }
     }
 }
