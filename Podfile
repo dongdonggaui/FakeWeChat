@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '8.0'
+platform :ios, '9.0'
 # Uncomment this line if you're using Swift
 use_frameworks!
 
@@ -9,9 +9,9 @@ target 'FakeWeChat' do
   pod 'Kingfisher', '~> 1.8.5'
   pod 'SwiftyJSON', '~> 2.3.2'
   pod 'SnapKit', '~> 0.18.0'
-  pod 'AVOSCloudDynamic'
-  pod 'AVOSCloudIMDynamic'
   pod 'KVOController'
+  pod 'AVOSCloudIMDynamic'
+  pod 'AVOSCloudDynamic'
 end
 
 target 'FakeWeChatTests' do

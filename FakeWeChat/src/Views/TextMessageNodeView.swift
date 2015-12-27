@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import YYKit
-import SnapKit
 
 class TextMessageNodeView: MessageNodeView {
     

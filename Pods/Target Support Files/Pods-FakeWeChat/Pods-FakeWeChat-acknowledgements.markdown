@@ -1,14 +1,6 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## AVOSCloudDynamic
-
-Copyright 2015 LeanCloud, Inc. See https://leancloud.cn/terms.html
-
-## AVOSCloudIMDynamic
-
-Copyright 2015 LeanCloud, Inc. See https://leancloud.cn/terms.html
-
 ## Alamofire
 
 Copyright (c) 2014–2015 Alamofire Software Foundation (http://alamofire.org/)
