@@ -9,13 +9,17 @@
 import UIKit
 import SnapKit
 
-private let MessageListViewSearchBarHeight = CGFloat(44)
-private let MessageListViewSearchBarInvisibleBottomMargin = CGFloat(0)
-private let MessageListViewSearchBarVisibleBottomMargin = CGFloat(64 + MessageListViewSearchBarHeight)
-
-private let MessageListViewToolbarHeight = CGFloat(44)
-private let MessageListViewToolbarInvisibleTopMargin = CGFloat(0)
-private let MessageListViewToolbarVisibleTopMargin = CGFloat(-MessageListViewToolbarHeight)
+struct MLVLayoutInfo {
+    
+    static let TableViewTopInsetRegular = CGFloat(64)
+    static let TableViewTopInsetCompact = CGFloat(32)
+    
+    static let SearchBarHeight = CGFloat(44)
+    static let SearchBarInvisibleBottomMargin = CGFloat(0)
+    
+    static let ToolbarHeight = CGFloat(44)
+    static let ToolbarInvisibleTopMargin = CGFloat(0)
+}
 
 @objc protocol MessageListViewDelegate : NSObjectProtocol {
     
@@ -50,53 +54,7 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
     var editing: Bool = false {
         didSet {
             tableView.setEditing(editing, animated: true)
-            
-            let updateCustomConstraints = {[weak self] () -> Void in
-                if self == nil {
-                    return
-                }
-                let searchBarOffset = self!.editing ? MessageListViewSearchBarVisibleBottomMargin : MessageListViewSearchBarInvisibleBottomMargin
-                self!._searchBarBottomConstraint!.updateOffset(searchBarOffset)
-                let toolbarOffset = self!.editing ? MessageListViewToolbarVisibleTopMargin : MessageListViewToolbarInvisibleTopMargin
-                self!._functionToolbarTopConstraint!.updateOffset(toolbarOffset)
-            }
-            
-            let updateTableView = {[weak self] () -> Void in
-                if self == nil {
-                    return
-                }
-                let tableViewTopInsetDelta = self!.editing ? MessageListViewSearchBarHeight : -MessageListViewSearchBarHeight
-                var contentInset = self!.tableView.contentInset
-                contentInset.top += tableViewTopInsetDelta
-                self!.tableView.contentInset = contentInset
-            }
-            
-            let updateOtherViews = {[weak self] () -> Void in
-                if self == nil {
-                    return
-                }
-                self!.layoutIfNeeded()
-            }
-
-            if editing {
-                UIView.animateWithDuration(0.25, animations: { () -> Void in
-                    updateTableView()
-                    }) { (finished) -> Void in
-                        updateCustomConstraints()
-                        UIView.animateWithDuration(0.25, animations: { () -> Void in
-                            updateOtherViews()
-                        })
-                }
-            } else {
-                updateCustomConstraints()
-                UIView.animateWithDuration(0.25, animations: { () -> Void in
-                    updateOtherViews()
-                    }) { (finished) -> Void in
-                        UIView.animateWithDuration(0.25, animations: { () -> Void in
-                            updateTableView()
-                        })
-                }
-            }
+            _updateViewsLayout()
         }
     }
 
@@ -178,6 +136,9 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
     }
     
     // MARK: - Public Methods
+    func willTransitionToSize(size: CGSize) {
+        _updateViewsLayout()
+    }
     
     // MARK: - Private Methods
     private func _messageListViewInit() {
@@ -208,19 +169,82 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
             make.edges.equalTo(self)
         }
         _searchBar.snp_makeConstraints { (make) -> Void in
-            _searchBarBottomConstraint = make.bottom.equalTo(self.snp_top).offset(MessageListViewSearchBarInvisibleBottomMargin).constraint
+            _searchBarBottomConstraint = make.bottom.equalTo(self.snp_top).offset(MLVLayoutInfo.SearchBarInvisibleBottomMargin).constraint
             make.leading.trailing.equalTo(self)
-            make.height.equalTo(MessageListViewSearchBarHeight)
+            make.height.equalTo(MLVLayoutInfo.SearchBarHeight)
         }
         _functionToolbar.snp_makeConstraints { (make) -> Void in
-            _functionToolbarTopConstraint = make.top.equalTo(self.snp_bottom).offset(MessageListViewToolbarInvisibleTopMargin).constraint
+            _functionToolbarTopConstraint = make.top.equalTo(self.snp_bottom).offset(MLVLayoutInfo.ToolbarInvisibleTopMargin).constraint
             make.leading.trailing.equalTo(self)
-            make.height.equalTo(MessageListViewToolbarHeight)
+            make.height.equalTo(MLVLayoutInfo.ToolbarHeight)
         }
         
         tableView.registerClass(TextMessageTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.estimatedRowHeight = 60.0
         tableView.separatorStyle = .None
+    }
+    
+    private func _updateViewsLayout() {
+        
+        var tableViewTopInset: CGFloat
+        let isLandscape = UIApplication.sharedApplication().statusBarOrientation.isLandscape
+        let isCompact = traitCollection.verticalSizeClass == .Compact
+        if isLandscape && isCompact {
+            tableViewTopInset = MLVLayoutInfo.TableViewTopInsetCompact
+        } else {
+            tableViewTopInset = MLVLayoutInfo.TableViewTopInsetRegular
+        }
+        
+        let updateCustomConstraints = {[weak self] () -> Void in
+            
+            if self == nil {
+                return
+            }
+            let searchBarOffset = self!.editing ? (tableViewTopInset + MLVLayoutInfo.SearchBarHeight) : MLVLayoutInfo.SearchBarInvisibleBottomMargin
+            self!._searchBarBottomConstraint!.updateOffset(searchBarOffset)
+            
+            let toolbarOffset = self!.editing ? (-MLVLayoutInfo.ToolbarHeight) : MLVLayoutInfo.ToolbarInvisibleTopMargin
+            self!._functionToolbarTopConstraint!.updateOffset(toolbarOffset)
+        }
+        
+        let updateTableView = {[weak self] () -> Void in
+            
+            if self == nil {
+                return
+            }
+            var contentInset = self!.tableView.contentInset
+            contentInset.top = self!.editing ? (tableViewTopInset + MLVLayoutInfo.SearchBarHeight) : tableViewTopInset
+            contentInset.bottom = self!.editing ? MLVLayoutInfo.ToolbarHeight : 0
+            self!.tableView.contentInset = contentInset
+            self!.tableView.scrollIndicatorInsets = contentInset
+        }
+        
+        let updateOtherViews = {[weak self] () -> Void in
+            if self == nil {
+                return
+            }
+            self!.layoutIfNeeded()
+        }
+        
+        if editing {
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                updateTableView()
+                }) { (finished) -> Void in
+                    updateCustomConstraints()
+                    UIView.animateWithDuration(0.25, animations: { () -> Void in
+                        updateOtherViews()
+                    })
+            }
+        } else {
+            updateCustomConstraints()
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                updateOtherViews()
+                }) { (finished) -> Void in
+                    UIView.animateWithDuration(0.25, animations: { () -> Void in
+                        updateTableView()
+                    })
+            }
+        }
     }
 
 }

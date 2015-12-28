@@ -11,6 +11,7 @@ import SnapKit
 
 class ChatViewController: UIViewController, MessageListViewDelegate {
 
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +29,18 @@ class ChatViewController: UIViewController, MessageListViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        
+        coordinator.animateAlongsideTransition({ [weak self] (context) -> Void in
+            if self == nil {
+                return
+            }
+            self!._messageListView.willTransitionToSize(size)
+            }, completion: nil)
+        
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     }
     
     // MARK: - Private Properties
