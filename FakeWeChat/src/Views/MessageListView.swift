@@ -24,7 +24,7 @@ private let MessageListViewToolbarVisibleTopMargin = CGFloat(-MessageListViewToo
     optional func messageListView(messageListView: MessageListView, didDeselectedCell cell: UITableViewCell, atIndexPath indexPath: NSIndexPath)
 }
 
-class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, MessageNodeViewDelegate {
+class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, MessageNodeViewDelegate {
     
     // MARK: - Life Cycle
     override init(frame: CGRect) {
@@ -40,6 +40,9 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, Mess
     }
     
     // MARK: - Override
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+    }
     
     // MARK: - Public Properties
     let tableView = UITableView()
@@ -155,6 +158,12 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, Mess
         textMessageCell.textMessageNodeView.cell = textMessageCell
     }
     
+    // MARK: - UIGestureRecognizerDelegate
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        return true
+    }
+    
     // MARK: - MessageViewDelegate
     func messageViewDidTappedAvatar(messageNodeView: MessageNodeView) {
         print("avatar tapped")
@@ -177,6 +186,17 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, Mess
         tableView.delegate = self
         tableView.allowsMultipleSelectionDuringEditing = true
         tableView.tableFooterView = UIView()
+        
+        let pan = UIPanGestureRecognizer { [weak self] (gesture) -> Void in
+            if self == nil {
+                return
+            }
+            if gesture.state == .Began {
+                self!.endEditing(true)
+            }
+        }
+        pan.delegate = self
+        tableView.addGestureRecognizer(pan)
         
         _searchBar.placeholder = NSLocalizedString("Search", comment: "Message List View Search")
         
