@@ -133,13 +133,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="CiY-7H-9dA">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="MMg-Co-NFA">
-                            <connections>
-                                <action selector="selectTapped:" destination="rJQ-OU-DBs" id="g7Y-Os-d7x"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="CiY-7H-9dA"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vP3-bZ-whe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

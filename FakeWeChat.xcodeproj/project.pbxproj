@@ -33,6 +33,18 @@
 		095C07331C2D1B5B004D00C7 /* WBStatusComposeTextParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C07311C2D1B5B004D00C7 /* WBStatusComposeTextParser.m */; };
 		095C07371C2D1C7B004D00C7 /* WBStatusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C07361C2D1C7B004D00C7 /* WBStatusHelper.m */; };
 		095C073A1C2D1CAC004D00C7 /* WBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C07391C2D1CAC004D00C7 /* WBModel.m */; };
+		099558C31C30F74D00355ADC /* Alamofire.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 099558C21C30F74D00355ADC /* Alamofire.framework.dSYM */; };
+		099558C51C30F75300355ADC /* Chameleon.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 099558C41C30F75300355ADC /* Chameleon.framework.dSYM */; };
+		099558C71C30F75B00355ADC /* Kingfisher.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 099558C61C30F75B00355ADC /* Kingfisher.framework.dSYM */; };
+		099558C91C30F76400355ADC /* SnapKit.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 099558C81C30F76400355ADC /* SnapKit.framework.dSYM */; };
+		099558CB1C30F76A00355ADC /* SwiftyJSON.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 099558CA1C30F76A00355ADC /* SwiftyJSON.framework.dSYM */; };
+		099558CD1C30F83200355ADC /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099558CC1C30F83200355ADC /* Alamofire.framework */; };
+		099558CF1C30F83A00355ADC /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099558CE1C30F83A00355ADC /* Chameleon.framework */; };
+		099558D11C30F84000355ADC /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099558D01C30F84000355ADC /* Kingfisher.framework */; };
+		099558D31C30F84400355ADC /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099558D21C30F84400355ADC /* SnapKit.framework */; };
+		099558D51C30F84900355ADC /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099558D41C30F84900355ADC /* SwiftyJSON.framework */; };
+		09C26F241C313311005CF561 /* MessageListToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C26F231C313311005CF561 /* MessageListToolbar.swift */; };
+		09C26F261C31344F005CF561 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C26F251C31344F005CF561 /* AppContext.swift */; };
 		4F3F46307628D25E6DC5206D /* Pods_FakeWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B60BC8438D6F430472A1864 /* Pods_FakeWeChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +64,23 @@
 			remoteInfo = FakeWeChat;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		099558BF1C30F66200355ADC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				099558C31C30F74D00355ADC /* Alamofire.framework.dSYM in CopyFiles */,
+				099558C51C30F75300355ADC /* Chameleon.framework.dSYM in CopyFiles */,
+				099558C71C30F75B00355ADC /* Kingfisher.framework.dSYM in CopyFiles */,
+				099558C91C30F76400355ADC /* SnapKit.framework.dSYM in CopyFiles */,
+				099558CB1C30F76A00355ADC /* SwiftyJSON.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0619373F1C2D8CA400639A40 /* TQHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TQHelper.swift; sourceTree = "<group>"; };
@@ -91,6 +120,18 @@
 		095C07361C2D1C7B004D00C7 /* WBStatusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBStatusHelper.m; sourceTree = "<group>"; };
 		095C07381C2D1CAC004D00C7 /* WBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBModel.h; sourceTree = "<group>"; };
 		095C07391C2D1CAC004D00C7 /* WBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBModel.m; sourceTree = "<group>"; };
+		099558C21C30F74D00355ADC /* Alamofire.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Alamofire.framework.dSYM; path = Carthage/Build/iOS/Alamofire.framework.dSYM; sourceTree = "<group>"; };
+		099558C41C30F75300355ADC /* Chameleon.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Chameleon.framework.dSYM; path = Carthage/Build/iOS/Chameleon.framework.dSYM; sourceTree = "<group>"; };
+		099558C61C30F75B00355ADC /* Kingfisher.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Kingfisher.framework.dSYM; path = Carthage/Build/iOS/Kingfisher.framework.dSYM; sourceTree = "<group>"; };
+		099558C81C30F76400355ADC /* SnapKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SnapKit.framework.dSYM; path = Carthage/Build/iOS/SnapKit.framework.dSYM; sourceTree = "<group>"; };
+		099558CA1C30F76A00355ADC /* SwiftyJSON.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftyJSON.framework.dSYM; path = Carthage/Build/iOS/SwiftyJSON.framework.dSYM; sourceTree = "<group>"; };
+		099558CC1C30F83200355ADC /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		099558CE1C30F83A00355ADC /* Chameleon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chameleon.framework; path = Carthage/Build/iOS/Chameleon.framework; sourceTree = "<group>"; };
+		099558D01C30F84000355ADC /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		099558D21C30F84400355ADC /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		099558D41C30F84900355ADC /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		09C26F231C313311005CF561 /* MessageListToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListToolbar.swift; sourceTree = "<group>"; };
+		09C26F251C31344F005CF561 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		2DBD7506C823E77277F44EE9 /* Pods-FakeWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FakeWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FakeWeChat/Pods-FakeWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		49C16CB998C890FBFDC75065 /* Pods-FakeWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FakeWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FakeWeChat/Pods-FakeWeChat.debug.xcconfig"; sourceTree = "<group>"; };
 		9B60BC8438D6F430472A1864 /* Pods_FakeWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FakeWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +142,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				099558D51C30F84900355ADC /* SwiftyJSON.framework in Frameworks */,
 				4F3F46307628D25E6DC5206D /* Pods_FakeWeChat.framework in Frameworks */,
+				099558CD1C30F83200355ADC /* Alamofire.framework in Frameworks */,
+				099558CF1C30F83A00355ADC /* Chameleon.framework in Frameworks */,
+				099558D11C30F84000355ADC /* Kingfisher.framework in Frameworks */,
+				099558D31C30F84400355ADC /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +185,7 @@
 				095C07011C2D08D7004D00C7 /* FakeWeChatUITests */,
 				095C06E01C2D08D7004D00C7 /* Products */,
 				36E931C6D06BAF4BCA743645 /* Pods */,
+				09C26F221C313292005CF561 /* CarthageSymbols */,
 				699E10DFDD710FBD6F739182 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -253,6 +300,7 @@
 				064060071C2E69EE0035F510 /* TextMessageNodeView.swift */,
 				0640600B1C2E7E860035F510 /* BubbleTextView.swift */,
 				06BF9A8D1C302737005B7B72 /* MessageListView.swift */,
+				09C26F231C313311005CF561 /* MessageListToolbar.swift */,
 			);
 			name = Views;
 			path = src/Views;
@@ -263,6 +311,7 @@
 			children = (
 				095C072A1C2D1A3C004D00C7 /* ImageComposer.swift */,
 				0619373F1C2D8CA400639A40 /* TQHelper.swift */,
+				09C26F251C31344F005CF561 /* AppContext.swift */,
 			);
 			name = Utls;
 			path = src/Utls;
@@ -292,6 +341,18 @@
 			path = YYKitExtension;
 			sourceTree = "<group>";
 		};
+		09C26F221C313292005CF561 /* CarthageSymbols */ = {
+			isa = PBXGroup;
+			children = (
+				099558CA1C30F76A00355ADC /* SwiftyJSON.framework.dSYM */,
+				099558C81C30F76400355ADC /* SnapKit.framework.dSYM */,
+				099558C61C30F75B00355ADC /* Kingfisher.framework.dSYM */,
+				099558C41C30F75300355ADC /* Chameleon.framework.dSYM */,
+				099558C21C30F74D00355ADC /* Alamofire.framework.dSYM */,
+			);
+			name = CarthageSymbols;
+			sourceTree = "<group>";
+		};
 		36E931C6D06BAF4BCA743645 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +365,11 @@
 		699E10DFDD710FBD6F739182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				099558D41C30F84900355ADC /* SwiftyJSON.framework */,
+				099558D21C30F84400355ADC /* SnapKit.framework */,
+				099558D01C30F84000355ADC /* Kingfisher.framework */,
+				099558CE1C30F83A00355ADC /* Chameleon.framework */,
+				099558CC1C30F83200355ADC /* Alamofire.framework */,
 				9B60BC8438D6F430472A1864 /* Pods_FakeWeChat.framework */,
 			);
 			name = Frameworks;
@@ -322,6 +388,8 @@
 				095C06DD1C2D08D7004D00C7 /* Resources */,
 				C82EDE2A72435ED9C47BBF43 /* Embed Pods Frameworks */,
 				5BAB8D1FDE41C314773C48E1 /* Copy Pods Resources */,
+				099558BE1C30F4D900355ADC /* ShellScript */,
+				099558BF1C30F66200355ADC /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -443,6 +511,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		099558BE1C30F4D900355ADC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		5BAB8D1FDE41C314773C48E1 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -508,8 +594,10 @@
 				0640600C1C2E7E860035F510 /* BubbleTextView.swift in Sources */,
 				095C07321C2D1B5B004D00C7 /* WBEmoticonInputView.m in Sources */,
 				095C073A1C2D1CAC004D00C7 /* WBModel.m in Sources */,
+				09C26F261C31344F005CF561 /* AppContext.swift in Sources */,
 				0640600A1C2E7ACD0035F510 /* ChatViewController.swift in Sources */,
 				095C07371C2D1C7B004D00C7 /* WBStatusHelper.m in Sources */,
+				09C26F241C313311005CF561 /* MessageListToolbar.swift in Sources */,
 				095C07141C2D0AC3004D00C7 /* AppDelegate.swift in Sources */,
 				095C07231C2D0FB9004D00C7 /* ConversationViewController.swift in Sources */,
 			);
@@ -662,11 +750,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/AVOSCloudDynamic/**\"",
-					"\"${PODS_ROOT}/AVOSCloudIMDynamic/**\"",
-					"\"${PODS_ROOT}/AVOSCloudDynamic/iOS/release-v3.1.7.1/Dynamic\"",
-					"\"${PODS_ROOT}/AVOSCloudDynamic/iOS/release-v3.1.7.1/Dynamic\"",
-					"\"${PODS_ROOT}/AVOSCloudIMDynamic/iOS/release-v3.1.7.1/Dynamic\"",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -692,11 +776,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/AVOSCloudDynamic/**\"",
-					"\"${PODS_ROOT}/AVOSCloudIMDynamic/**\"",
-					"\"${PODS_ROOT}/AVOSCloudDynamic/iOS/release-v3.1.7.1/Dynamic\"",
-					"\"${PODS_ROOT}/AVOSCloudDynamic/iOS/release-v3.1.7.1/Dynamic\"",
-					"\"${PODS_ROOT}/AVOSCloudIMDynamic/iOS/release-v3.1.7.1/Dynamic\"",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

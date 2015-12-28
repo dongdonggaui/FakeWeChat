@@ -9,31 +9,99 @@
 import UIKit
 import SnapKit
 
-private let MessageListViewSearchBarInvisibleBottomMargin = CGFloat(0)
-private let MessageListViewSearchBarVisibleBottomMargin = CGFloat(64)
 private let MessageListViewSearchBarHeight = CGFloat(44)
+private let MessageListViewSearchBarInvisibleBottomMargin = CGFloat(0)
+private let MessageListViewSearchBarVisibleBottomMargin = CGFloat(64 + MessageListViewSearchBarHeight)
 
-class MessageListView: UIView, UITableViewDataSource, UITableViewDelegate, MessageNodeViewDelegate {
+private let MessageListViewToolbarHeight = CGFloat(44)
+private let MessageListViewToolbarInvisibleTopMargin = CGFloat(0)
+private let MessageListViewToolbarVisibleTopMargin = CGFloat(-MessageListViewToolbarHeight)
+
+@objc protocol MessageListViewDelegate : NSObjectProtocol {
+    
+    optional func messageListView(messageListView: MessageListView, didTappedMoreMenuItemInCell cell: UITableViewCell, atIndexPath indexPath: NSIndexPath)
+    optional func messageListView(messageListView: MessageListView, didSelectedCell cell: UITableViewCell, atIndexPath indexPath: NSIndexPath)
+    optional func messageListView(messageListView: MessageListView, didDeselectedCell cell: UITableViewCell, atIndexPath indexPath: NSIndexPath)
+}
+
+class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, MessageNodeViewDelegate {
     
     // MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        messageListViewInit()
+        _messageListViewInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        messageListViewInit()
+        _messageListViewInit()
     }
+    
+    // MARK: - Override
     
     // MARK: - Public Properties
     let tableView = UITableView()
+    weak var delegate: MessageListViewDelegate?
+    var editing: Bool = false {
+        didSet {
+            tableView.setEditing(editing, animated: true)
+            
+            let updateCustomConstraints = {[weak self] () -> Void in
+                if self == nil {
+                    return
+                }
+                let searchBarOffset = self!.editing ? MessageListViewSearchBarVisibleBottomMargin : MessageListViewSearchBarInvisibleBottomMargin
+                self!._searchBarBottomConstraint!.updateOffset(searchBarOffset)
+                let toolbarOffset = self!.editing ? MessageListViewToolbarVisibleTopMargin : MessageListViewToolbarInvisibleTopMargin
+                self!._functionToolbarTopConstraint!.updateOffset(toolbarOffset)
+            }
+            
+            let updateTableView = {[weak self] () -> Void in
+                if self == nil {
+                    return
+                }
+                let tableViewTopInsetDelta = self!.editing ? MessageListViewSearchBarHeight : -MessageListViewSearchBarHeight
+                var contentInset = self!.tableView.contentInset
+                contentInset.top += tableViewTopInsetDelta
+                self!.tableView.contentInset = contentInset
+            }
+            
+            let updateOtherViews = {[weak self] () -> Void in
+                if self == nil {
+                    return
+                }
+                self!.layoutIfNeeded()
+            }
+
+            if editing {
+                UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    updateTableView()
+                    }) { (finished) -> Void in
+                        updateCustomConstraints()
+                        UIView.animateWithDuration(0.25, animations: { () -> Void in
+                            updateOtherViews()
+                        })
+                }
+            } else {
+                updateCustomConstraints()
+                UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    updateOtherViews()
+                    }) { (finished) -> Void in
+                        UIView.animateWithDuration(0.25, animations: { () -> Void in
+                            updateTableView()
+                        })
+                }
+            }
+        }
+    }
 
     // MARK: - Private Properties
-    private let searchBar = UISearchBar()
-    private var searchBarTopConstraint: Constraint?
+    private lazy var _searchBar = UISearchBar()
+    private var _searchBarBottomConstraint: Constraint?
+    private lazy var _functionToolbar = MessageListToolbar()
+    private var _functionToolbarTopConstraint: Constraint?
     
     // MARK: - Table View
     
@@ -51,6 +119,32 @@ class MessageListView: UIView, UITableViewDataSource, UITableViewDelegate, Messa
         return UITableViewAutomaticDimension
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if !editing {
+            return
+        }
+        print("selected at index --> \(indexPath)")
+        if delegate == nil {
+            return
+        }
+        if delegate!.respondsToSelector("messageListView:didSelectedCell:atIndexPath:") {
+            delegate!.messageListView!(self, didSelectedCell: tableView.cellForRowAtIndexPath(indexPath)!, atIndexPath: indexPath)
+        }
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        if !editing {
+            return
+        }
+        print("deselected at index --> \(indexPath)")
+        if delegate == nil {
+            return
+        }
+        if delegate!.respondsToSelector("messageListView:didDeselectedCell:atIndexPath:") {
+            delegate!.messageListView!(self, didDeselectedCell: tableView.cellForRowAtIndexPath(indexPath)!, atIndexPath: indexPath)
+        }
+    }
+    
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let textMessageCell = cell as! TextMessageTableViewCell
         let dice: UInt32 = 100
@@ -58,28 +152,50 @@ class MessageListView: UIView, UITableViewDataSource, UITableViewDelegate, Messa
         textMessageCell.textMessageNodeView.textMessage = "message --> \(randomNum)"
         textMessageCell.textMessageNodeView.messageFromType = indexPath.row % 2 == 0 ? .Incoming : .Outgoing
         textMessageCell.textMessageNodeView.delegate = self
+        textMessageCell.textMessageNodeView.cell = textMessageCell
     }
     
     // MARK: - MessageViewDelegate
     func messageViewDidTappedAvatar(messageNodeView: MessageNodeView) {
-        print("tapped")
+        print("avatar tapped")
     }
     
+    func messageViewDidMoreMenuTapped(messageNodeView: MessageNodeView) {
+        if delegate != nil && delegate!.respondsToSelector("messageListView:didTappedMoreMenuItemInCell:atIndexPath:") {
+            let cell = messageNodeView.cell!
+            let indexPath = tableView.indexPathForCell(cell)!
+            delegate!.messageListView!(self, didTappedMoreMenuItemInCell: cell, atIndexPath: indexPath)
+        }
+    }
+    
+    // MARK: - Public Methods
+    
     // MARK: - Private Methods
-    private func messageListViewInit() {
+    private func _messageListViewInit() {
+        
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsMultipleSelectionDuringEditing = true
         tableView.tableFooterView = UIView()
         
+        _searchBar.placeholder = NSLocalizedString("Search", comment: "Message List View Search")
+        
         addSubview(tableView)
-        addSubview(searchBar)
+        addSubview(_searchBar)
+        addSubview(_functionToolbar)
+        
         tableView.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(self)
         }
-        searchBar.snp_makeConstraints { (make) -> Void in
-            searchBarTopConstraint = make.bottom.equalTo(self.snp_top).offset(MessageListViewSearchBarInvisibleBottomMargin).constraint
+        _searchBar.snp_makeConstraints { (make) -> Void in
+            _searchBarBottomConstraint = make.bottom.equalTo(self.snp_top).offset(MessageListViewSearchBarInvisibleBottomMargin).constraint
             make.leading.trailing.equalTo(self)
             make.height.equalTo(MessageListViewSearchBarHeight)
+        }
+        _functionToolbar.snp_makeConstraints { (make) -> Void in
+            _functionToolbarTopConstraint = make.top.equalTo(self.snp_bottom).offset(MessageListViewToolbarInvisibleTopMargin).constraint
+            make.leading.trailing.equalTo(self)
+            make.height.equalTo(MessageListViewToolbarHeight)
         }
         
         tableView.registerClass(TextMessageTableViewCell.self, forCellReuseIdentifier: "cell")

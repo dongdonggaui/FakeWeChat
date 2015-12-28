@@ -9,29 +9,58 @@
 import UIKit
 
 enum MessageFromType: Int {
+    
     case Incoming = 1
     case Outgoing = 2
 }
 
-enum MessageNodeViewFlag: Int {
-    case Avatar = 1
-    case Content = 2
-    case Placeholder = 3
+struct MessageNodeViewFlag {
+    
+    static let Avatar = 1
+    static let Content = 2
+    static let Placeholder = 3
 }
 
-enum MessageNodeViewCustomMenuKey: String {
-    case Title = "title"
-    case Action = "action"
+struct MNVCustomMenuKey {
+    
+    static let Title = "title"
+    static let Action = "action"
 }
 
-@objc protocol MessageNodeViewDelegate: NSObjectProtocol {
+struct MNVCustomMenuTitle {
+    
+    static let More = "More..."
+}
+
+struct MNVCustomMenuAction {
+    
+    static let Copy = "copy:"
+    static let Delete = "delete:"
+    static let More = "more:"
+}
+
+struct MessageNodeViewCustomMenuItemOptions : OptionSetType {
+    
+    let rawValue: UInt
+    init(rawValue: UInt) {
+        self.rawValue = rawValue
+    }
+    
+    static let Copy = MessageNodeViewCustomMenuItemOptions(rawValue: 1<<0)
+    static let Delete = MessageNodeViewCustomMenuItemOptions(rawValue: 1<<1)
+    static let More = MessageNodeViewCustomMenuItemOptions(rawValue: 1<<2)
+}
+
+@objc protocol MessageNodeViewDelegate : NSObjectProtocol {
     optional func messageViewDidTappedAvatar(messageNodeView: MessageNodeView)
+    optional func messageViewDidMoreMenuTapped(messageNodeView: MessageNodeView)
 }
 
 class MessageNodeView: UIView {
 
     // MARK: - Properties
     weak var delegate: MessageNodeViewDelegate?
+    weak var cell: UITableViewCell?
     
     let contentStackView = UIStackView()
     
@@ -46,12 +75,12 @@ class MessageNodeView: UIView {
     // MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        messageNodeViewInit()
+        _messageNodeViewInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        messageNodeViewInit()
+        _messageNodeViewInit()
     }
     
     // MARK: - Menu
@@ -59,8 +88,40 @@ class MessageNodeView: UIView {
         return true
     }
     
+    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+        
+        let options = customMenuItemOptions()
+        let actionDescription = action.description
+        
+        if actionDescription == MNVCustomMenuAction.Copy && options.contains(.Copy) {
+            return true
+        }
+        if actionDescription == MNVCustomMenuAction.Delete && options.contains(.Delete) {
+            return true
+        }
+        if actionDescription == MNVCustomMenuAction.More && options.contains(.More) {
+            return true
+        }
+
+        return false
+    }
+    
+    override func copy(sender: AnyObject?) {
+        fatalError("copy: must be implemented")
+    }
+    
+    override func delete(sender: AnyObject?) {
+        fatalError("delete: must be implemented")
+    }
+    
+    func more(sender: AnyObject?) {
+        if delegate != nil && delegate!.respondsToSelector("messageViewDidMoreMenuTapped:") {
+            delegate!.messageViewDidMoreMenuTapped!(self)
+        }
+    }
+    
     // MARK: - Event Response
-    private func avatarButtonTapped(sender: UIButton) {
+    func avatarButtonTapped(sender: UIButton) {
         if let sDelegate = delegate {
             if sDelegate.respondsToSelector("messageViewDidTappedAvatar:") {
                 sDelegate.messageViewDidTappedAvatar!(self)
@@ -72,15 +133,14 @@ class MessageNodeView: UIView {
         if gesture.state == .Began {
             becomeFirstResponder()
             let menuController = UIMenuController.sharedMenuController()
-            if let customMenuItems = customMenuItems() {
-                var menuItmes: [UIMenuItem] = []
-                for itemInfo in customMenuItems {
-                    let menuItem = UIMenuItem(title: itemInfo[MessageNodeViewCustomMenuKey.Title.rawValue]!, action: Selector(itemInfo[MessageNodeViewCustomMenuKey.Action.rawValue]!))
-                    menuItmes += [menuItem]
-                }
-                menuController.menuItems = menuItmes
+            let customMenuItems = _decodedMenuItems(withOptions: customMenuItemOptions())
+            var menuItmes: [UIMenuItem] = []
+            for itemInfo in customMenuItems {
+                let menuItem = UIMenuItem(title: itemInfo[MNVCustomMenuKey.Title]!, action: Selector(itemInfo[MNVCustomMenuKey.Action]!))
+                menuItmes += [menuItem]
             }
-            let messageView = viewWithTag(MessageNodeViewFlag.Content.rawValue)!
+            menuController.menuItems = menuItmes
+            let messageView = viewWithTag(MessageNodeViewFlag.Content)!
             menuController.setTargetRect(messageView.frame, inView: contentStackView)
             menuController.setMenuVisible(true, animated: true)
         }
@@ -91,13 +151,13 @@ class MessageNodeView: UIView {
         fatalError("contentView() should be override")
     }
     
-    func customMenuItems() -> [Dictionary<String, String>]? {
-        return nil
+    func customMenuItemOptions() -> MessageNodeViewCustomMenuItemOptions {
+        return .Copy
     }
     
     // MARK: - Private Methods
-    private func messageNodeViewInit() {
-        avatarView.tag = MessageNodeViewFlag.Avatar.rawValue
+    private func _messageNodeViewInit() {
+        avatarView.tag = MessageNodeViewFlag.Avatar
         avatarView.addSubview(avatarImageView)
         avatarView.addSubview(avatarButton)
         avatarImageView.snp_makeConstraints { (make) -> Void in
@@ -121,9 +181,9 @@ class MessageNodeView: UIView {
         }
         
         let messageView = self.contentView()
-        messageView.tag = MessageNodeViewFlag.Content.rawValue
+        messageView.tag = MessageNodeViewFlag.Content
         
-        _placeholderView.tag = MessageNodeViewFlag.Placeholder.rawValue
+        _placeholderView.tag = MessageNodeViewFlag.Placeholder
         _placeholderView.setContentHuggingPriority(UILayoutPriorityDefaultLow, forAxis: .Horizontal)
         _placeholderView.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, forAxis: .Horizontal)
         
@@ -142,6 +202,15 @@ class MessageNodeView: UIView {
         messageView.backgroundColor = UIColor.orangeColor()
     }
     
+    private func _decodedMenuItems(withOptions options: MessageNodeViewCustomMenuItemOptions) -> [Dictionary<String, String>] {
+        var menuItemInfos: [Dictionary<String, String>] = []
+        if options.contains(.More) {
+            menuItemInfos += [[MNVCustomMenuKey.Title: MNVCustomMenuTitle.More, MNVCustomMenuKey.Action: MNVCustomMenuAction.More]]
+        }
+        
+        return menuItemInfos
+    }
+    
     // MARK: - Getters & Setters
     var messageFromType: MessageFromType {
         get {
@@ -149,9 +218,9 @@ class MessageNodeView: UIView {
         }
         set {
             if _messageFromType != newValue {
-                let avatar = viewWithTag(MessageNodeViewFlag.Avatar.rawValue)!
-                let content = viewWithTag(MessageNodeViewFlag.Content.rawValue)!
-                let placeholder = viewWithTag(MessageNodeViewFlag.Placeholder.rawValue)!
+                let avatar = viewWithTag(MessageNodeViewFlag.Avatar)!
+                let content = viewWithTag(MessageNodeViewFlag.Content)!
+                let placeholder = viewWithTag(MessageNodeViewFlag.Placeholder)!
                 
                 switch newValue {
                 case .Incoming:

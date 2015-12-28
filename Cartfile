@@ -1,0 +1,5 @@
+github "ViccAlexander/Chameleon"
+github "SnapKit/SnapKit"
+github "SwiftyJSON/SwiftyJSON"
+github "onevcat/Kingfisher"
+github "Alamofire/Alamofire"

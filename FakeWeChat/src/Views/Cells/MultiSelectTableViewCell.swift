@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Chameleon
 
 enum MultiSelectTableViewState {
     case Normal
@@ -41,10 +42,10 @@ class MultiSelectTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        if !self.shouldMultiSelect() {
+        if !shouldMultiSelect() {
             return
         }
-        
+        selectImageView.image = selected ? selectedIcon : normalIcon
     }
     
     override func setEditing(editing: Bool, animated: Bool) {
@@ -52,14 +53,18 @@ class MultiSelectTableViewCell: UITableViewCell {
             return
         }
         let constant = editing ? SelectImageVisibleLeading : SelectImageInVisibleLeading
-        self.updateContentStackLeadingConstraint(constant, animated: animated)
+        updateContentStackLeadingConstraint(constant, animated: animated)
+        
+        contentStackView.userInteractionEnabled = !editing
     }
     
     // MARK: - Property
-    let contentStackView = UIStackView()
-    let selectImageView = UIImageView()
-    let containerView = UIView()
-    var contentStackLeadingConstraint: Constraint?
+    private let contentStackView = UIStackView()
+    private let selectImageView = UIImageView()
+    private let containerView = UIView()
+    private var contentStackLeadingConstraint: Constraint?
+    private let normalIcon = UIImage(color: FlatSand(), size: CGSizeMake(20, 20)).imageByRoundCornerRadius(10)
+    private let selectedIcon = UIImage(color: FlatGreenDark(), size: CGSizeMake(20, 20)).imageByRoundCornerRadius(10)
     
     // MARK: - Public
     func multiSelectContentView() -> UIView {
@@ -101,9 +106,6 @@ class MultiSelectTableViewCell: UITableViewCell {
         }
         
         self.selectionStyle = .None
-        
-        // for test
-        selectImageView.backgroundColor = UIColor.yellowColor()
     }
     
     private func updateContentStackLeadingConstraint(constant: CGFloat, animated: Bool) {

@@ -9,16 +9,20 @@
 import UIKit
 import SnapKit
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController, MessageListViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(messageListView)
-        messageListView.snp_makeConstraints { (make) -> Void in
+        view.addSubview(_messageListView)
+        _messageListView.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(view)
         }
-        messageListView.tableView.separatorStyle = .None
+        _messageListView.tableView.separatorStyle = .None
+        _messageListView.delegate = self
+        
+        _cancelItem.target = self
+        _cancelItem.action = "_cancelItemTapped:"
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,11 +31,30 @@ class ChatViewController: UIViewController {
     }
     
     // MARK: - Private Properties
-    private let messageListView =  MessageListView()
+    private lazy var _messageListView: MessageListView =  MessageListView()
+    private lazy var _cancelItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: nil, action: nil)
+    
+    // MARK: - MessageListViewDelegate
+    func messageListView(messageListView: MessageListView, didTappedMoreMenuItemInCell cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        
+        _switchToEditMode(true)
+    }
     
     // MARK: - Event Response
-    @IBAction func selectTapped(sender: UIBarButtonItem) {
-        messageListView.tableView.setEditing(!messageListView.tableView.editing, animated: true)
+    func _cancelItemTapped(sender: UIBarButtonItem) {
+        
+        _switchToEditMode(false)
+    }
+    
+    // MARK: - Private Methods
+    private func _switchToEditMode(edit: Bool) {
+        
+        _messageListView.editing = edit
+        if edit {
+            navigationItem.leftBarButtonItem = _cancelItem
+        } else {
+            navigationItem.leftBarButtonItem = nil
+        }
     }
 
 }
