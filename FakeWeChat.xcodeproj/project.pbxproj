@@ -756,6 +756,7 @@
 					"$(inherited)",
 					"${PODS_ROOT}/Headers/Private/KVOController",
 					"${PODS_ROOT}/Headers/Private/YYKit",
+					"${PODS_ROOT}/Headers/Private/FDStackView",
 				);
 				INFOPLIST_FILE = FakeWeChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -782,6 +783,7 @@
 					"$(inherited)",
 					"${PODS_ROOT}/Headers/Private/KVOController",
 					"${PODS_ROOT}/Headers/Private/YYKit",
+					"${PODS_ROOT}/Headers/Private/FDStackView",
 				);
 				INFOPLIST_FILE = FakeWeChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

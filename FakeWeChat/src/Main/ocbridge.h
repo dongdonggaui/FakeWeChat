@@ -13,5 +13,6 @@
 #import "WBStatusComposeTextParser.h"
 #import <FBKVOController.h>
 #import <YYKit.h>
+#import <FDStackView.h>
 
 #endif /* ocbridge_h */

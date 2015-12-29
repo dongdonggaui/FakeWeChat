@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FDStackView
 
 enum MessageFromType: Int {
     

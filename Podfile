@@ -4,7 +4,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'FakeWeChat' do
-  pod 'YYKit', '~> 0.9.7'
+  pod 'YYKit'
   pod 'KVOController'
 #  pod 'AVOSCloudIMDynamic'
 #  pod 'AVOSCloudDynamic'
