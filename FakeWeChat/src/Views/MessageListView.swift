@@ -28,7 +28,7 @@ struct MLVLayoutInfo {
     optional func messageListView(messageListView: MessageListView, didDeselectedCell cell: UITableViewCell, atIndexPath indexPath: NSIndexPath)
 }
 
-class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, MessageNodeViewDelegate {
+class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, UISearchControllerDelegate, UISearchBarDelegate, MessageNodeViewDelegate {
     
     // MARK: - Life Cycle
     override init(frame: CGRect) {
@@ -44,8 +44,12 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
     }
     
     // MARK: - Override
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
+    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if previousTraitCollection == nil {
+            return
+        }
+        _updateViewsLayout()
     }
     
     // MARK: - Public Properties
@@ -63,6 +67,15 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
     private var _searchBarBottomConstraint: Constraint?
     private lazy var _functionToolbar = MessageListToolbar()
     private var _functionToolbarTopConstraint: Constraint?
+    private lazy var _searchResultViewController: MessageArchiveSearchResultViewController = MessageArchiveSearchResultViewController()
+    private lazy var _searchController: UISearchController = {
+        let sc = UISearchController(searchResultsController: self._searchResultViewController)
+        sc.delegate = self
+        sc.searchResultsUpdater = self._searchResultViewController
+        sc.searchBar.delegate = self
+        self._searchResultViewController.searchController = sc
+        return sc
+    }()
     
     // MARK: - Table View
     
@@ -108,8 +121,7 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let textMessageCell = cell as! TextMessageTableViewCell
-        let dice: UInt32 = 100
-        let randomNum = Int(arc4random_uniform(dice)) + 1
+        let randomNum = TQMathUtl.randomInRange(1...100)
         textMessageCell.textMessageNodeView.textMessage = "message --> \(randomNum)"
         textMessageCell.textMessageNodeView.messageFromType = indexPath.row % 2 == 0 ? .Incoming : .Outgoing
         textMessageCell.textMessageNodeView.delegate = self
@@ -135,10 +147,32 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
         }
     }
     
-    // MARK: - Public Methods
-    func willTransitionToSize(size: CGSize) {
-        _updateViewsLayout()
+    // MARK: - UISearchBarDelegate
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        if searchBar == _searchBar {
+            _searchBar.hidden = true
+            viewController.presentViewController(_searchController, animated: true, completion: nil)
+        }
     }
+    
+    func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == "\n" {
+            _searchResultViewController.performSearch()
+        }
+        return true
+    }
+    
+    // MARK: - UISearchControllerDelegate
+    func didPresentSearchController(searchController: UISearchController) {
+        searchController.searchBar.sizeToFit()
+    }
+    
+    func didDismissSearchController(searchController: UISearchController) {
+        _searchBar.hidden = false
+    }
+    
+    // MARK: - Public Methods
     
     // MARK: - Private Methods
     private func _messageListViewInit() {
@@ -160,6 +194,7 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
         tableView.addGestureRecognizer(pan)
         
         _searchBar.placeholder = NSLocalizedString("Search", comment: "Message List View Search")
+        _searchBar.delegate = self
         
         addSubview(tableView)
         addSubview(_searchBar)
@@ -178,6 +213,10 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
             make.leading.trailing.equalTo(self)
             make.height.equalTo(MLVLayoutInfo.ToolbarHeight)
         }
+//        _searchController.searchBar.snp_makeConstraints { (make) -> Void in
+//            make.leading.top.width.height.equalTo(_searchBar)
+//        }
+        _searchController.searchBar.sizeToFit()
         
         tableView.registerClass(TextMessageTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.estimatedRowHeight = 60.0
@@ -187,12 +226,16 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
     private func _updateViewsLayout() {
         
         var tableViewTopInset: CGFloat
-        let isLandscape = UIApplication.sharedApplication().statusBarOrientation.isLandscape
-        let isCompact = traitCollection.verticalSizeClass == .Compact
-        if isLandscape && isCompact {
+        
+        if tq_isMinimumWindowHeight() {
             tableViewTopInset = MLVLayoutInfo.TableViewTopInsetCompact
         } else {
             tableViewTopInset = MLVLayoutInfo.TableViewTopInsetRegular
+        }
+        
+        if _searchController.active {
+            _searchBarBottomConstraint!.updateOffset(tableViewTopInset + MLVLayoutInfo.SearchBarHeight)
+            return
         }
         
         let updateCustomConstraints = {[weak self] () -> Void in

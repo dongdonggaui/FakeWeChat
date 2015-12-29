@@ -12,12 +12,15 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "聊天";
-        self.tableView.tableFooterView = UIView()
-        self.tableView.estimatedRowHeight = 67
+        title = "聊天";
+        tableView.tableFooterView = UIView()
+        tableView.estimatedRowHeight = 67
+        tableView.tableHeaderView = _searchController.searchBar
+        tableView.contentOffset = CGPointMake(0, 44)
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +35,7 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 15
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -66,4 +69,11 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
             avatarView.setImagePaths(paths, placeholder: nil, completion: nil)
         }
     }
+    
+    // MARK: - Private Properties
+    private lazy var _searchResultViewController = GlobalSearchResultViewController()
+    private lazy var _searchController: GlobalSearchViewController = {
+        let sc = GlobalSearchViewController(searchResultsController: self._searchResultViewController)
+        return sc
+    }()
 }

@@ -29,6 +29,24 @@ extension UIApplication {
     }
 }
 
+extension UIView {
+    public func tq_isMinimumWindowHeight() -> Bool {
+        
+        let isLandscape = UIApplication.sharedApplication().statusBarOrientation.isLandscape
+        let isCompact = traitCollection.verticalSizeClass == .Compact
+        return isLandscape && isCompact
+    }
+}
+
+extension UIViewController {
+    public func tq_isMinimumWindowHeight() -> Bool {
+        
+        let isLandscape = UIApplication.sharedApplication().statusBarOrientation.isLandscape
+        let isCompact = traitCollection.verticalSizeClass == .Compact
+        return isLandscape && isCompact
+    }
+}
+
 extension UIImage {
     public static func tq_imageFromString(string: String, backgroundColor: UIColor, attributes: [String : AnyObject], size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, true, UIScreen.mainScreen().scale)

@@ -33,6 +33,18 @@
 		095C07331C2D1B5B004D00C7 /* WBStatusComposeTextParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C07311C2D1B5B004D00C7 /* WBStatusComposeTextParser.m */; };
 		095C07371C2D1C7B004D00C7 /* WBStatusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C07361C2D1C7B004D00C7 /* WBStatusHelper.m */; };
 		095C073A1C2D1CAC004D00C7 /* WBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C07391C2D1CAC004D00C7 /* WBModel.m */; };
+		095C7A1F1C328DD7000D2838 /* GlobalSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C7A1E1C328DD7000D2838 /* GlobalSearchViewController.swift */; };
+		095C7A211C328ECE000D2838 /* TimelineSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C7A201C328ECE000D2838 /* TimelineSearchResultViewController.swift */; };
+		095C7A231C328EF4000D2838 /* ArticleSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C7A221C328EF4000D2838 /* ArticleSearchResultViewController.swift */; };
+		095C7A251C328F25000D2838 /* CelebritySearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C7A241C328F25000D2838 /* CelebritySearchResultViewController.swift */; };
+		095C7A271C328F9B000D2838 /* SimpleSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C7A261C328F9B000D2838 /* SimpleSearchResultViewController.swift */; };
+		095C7A291C329CE8000D2838 /* GlobalSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C7A281C329CE8000D2838 /* GlobalSearchResultViewController.swift */; };
+		09737AD21C32389E00817C8D /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09737AD11C32389E00817C8D /* MessageInputView.swift */; };
+		09737AD51C32391F00817C8D /* MessageArchiveSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09737AD41C32391F00817C8D /* MessageArchiveSearchResultViewController.swift */; };
+		09737ADA1C3268DB00817C8D /* SVProgressHUD.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 09737AD91C3268DB00817C8D /* SVProgressHUD.framework.dSYM */; };
+		09737ADC1C32705F00817C8D /* SimpleCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09737ADB1C32705F00817C8D /* SimpleCellView.swift */; };
+		09737ADE1C32762A00817C8D /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09737ADD1C32762A00817C8D /* SearchResultTableViewCell.swift */; };
+		09737AE01C327D4700817C8D /* TQMathUtl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09737ADF1C327D4700817C8D /* TQMathUtl.swift */; };
 		099558C31C30F74D00355ADC /* Alamofire.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 099558C21C30F74D00355ADC /* Alamofire.framework.dSYM */; };
 		099558C51C30F75300355ADC /* Chameleon.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 099558C41C30F75300355ADC /* Chameleon.framework.dSYM */; };
 		099558C71C30F75B00355ADC /* Kingfisher.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 099558C61C30F75B00355ADC /* Kingfisher.framework.dSYM */; };
@@ -77,6 +89,7 @@
 				099558C71C30F75B00355ADC /* Kingfisher.framework.dSYM in CopyFiles */,
 				099558C91C30F76400355ADC /* SnapKit.framework.dSYM in CopyFiles */,
 				099558CB1C30F76A00355ADC /* SwiftyJSON.framework.dSYM in CopyFiles */,
+				09737ADA1C3268DB00817C8D /* SVProgressHUD.framework.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +133,18 @@
 		095C07361C2D1C7B004D00C7 /* WBStatusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBStatusHelper.m; sourceTree = "<group>"; };
 		095C07381C2D1CAC004D00C7 /* WBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBModel.h; sourceTree = "<group>"; };
 		095C07391C2D1CAC004D00C7 /* WBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBModel.m; sourceTree = "<group>"; };
+		095C7A1E1C328DD7000D2838 /* GlobalSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSearchViewController.swift; sourceTree = "<group>"; };
+		095C7A201C328ECE000D2838 /* TimelineSearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineSearchResultViewController.swift; sourceTree = "<group>"; };
+		095C7A221C328EF4000D2838 /* ArticleSearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleSearchResultViewController.swift; sourceTree = "<group>"; };
+		095C7A241C328F25000D2838 /* CelebritySearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebritySearchResultViewController.swift; sourceTree = "<group>"; };
+		095C7A261C328F9B000D2838 /* SimpleSearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSearchResultViewController.swift; sourceTree = "<group>"; };
+		095C7A281C329CE8000D2838 /* GlobalSearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSearchResultViewController.swift; sourceTree = "<group>"; };
+		09737AD11C32389E00817C8D /* MessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
+		09737AD41C32391F00817C8D /* MessageArchiveSearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageArchiveSearchResultViewController.swift; sourceTree = "<group>"; };
+		09737AD91C3268DB00817C8D /* SVProgressHUD.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SVProgressHUD.framework.dSYM; path = Carthage/Build/iOS/SVProgressHUD.framework.dSYM; sourceTree = "<group>"; };
+		09737ADB1C32705F00817C8D /* SimpleCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleCellView.swift; sourceTree = "<group>"; };
+		09737ADD1C32762A00817C8D /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
+		09737ADF1C327D4700817C8D /* TQMathUtl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TQMathUtl.swift; sourceTree = "<group>"; };
 		099558C21C30F74D00355ADC /* Alamofire.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Alamofire.framework.dSYM; path = Carthage/Build/iOS/Alamofire.framework.dSYM; sourceTree = "<group>"; };
 		099558C41C30F75300355ADC /* Chameleon.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Chameleon.framework.dSYM; path = Carthage/Build/iOS/Chameleon.framework.dSYM; sourceTree = "<group>"; };
 		099558C61C30F75B00355ADC /* Kingfisher.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Kingfisher.framework.dSYM; path = Carthage/Build/iOS/Kingfisher.framework.dSYM; sourceTree = "<group>"; };
@@ -173,6 +198,7 @@
 			children = (
 				064060101C2EDAE10035F510 /* MultiSelectTableViewCell.swift */,
 				064060121C2EE59F0035F510 /* TextMessageTableViewCell.swift */,
+				09737ADD1C32762A00817C8D /* SearchResultTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -254,6 +280,7 @@
 				095C071E1C2D0D97004D00C7 /* Chat */,
 				095C071F1C2D0D97004D00C7 /* Contacts */,
 				095C07201C2D0D97004D00C7 /* Other */,
+				09737AD31C32390F00817C8D /* Search */,
 				095C07211C2D0D97004D00C7 /* Timeline */,
 			);
 			name = ViewControllers;
@@ -296,11 +323,13 @@
 				0640600F1C2EDAC70035F510 /* Cells */,
 				095C07251C2D1187004D00C7 /* AvatarBadgeView.swift */,
 				095C07271C2D16EA004D00C7 /* BadgeView.swift */,
+				09737ADB1C32705F00817C8D /* SimpleCellView.swift */,
 				0640600D1C2EB3260035F510 /* MessageNodeView.swift */,
 				064060071C2E69EE0035F510 /* TextMessageNodeView.swift */,
 				0640600B1C2E7E860035F510 /* BubbleTextView.swift */,
 				06BF9A8D1C302737005B7B72 /* MessageListView.swift */,
 				09C26F231C313311005CF561 /* MessageListToolbar.swift */,
+				09737AD11C32389E00817C8D /* MessageInputView.swift */,
 			);
 			name = Views;
 			path = src/Views;
@@ -320,6 +349,7 @@
 		095C072C1C2D1B29004D00C7 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				09737AD61C32547400817C8D /* TQKit */,
 				095C072D1C2D1B5B004D00C7 /* YYKitExtension */,
 			);
 			name = Vendors;
@@ -341,6 +371,28 @@
 			path = YYKitExtension;
 			sourceTree = "<group>";
 		};
+		09737AD31C32390F00817C8D /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				095C7A1E1C328DD7000D2838 /* GlobalSearchViewController.swift */,
+				095C7A281C329CE8000D2838 /* GlobalSearchResultViewController.swift */,
+				095C7A261C328F9B000D2838 /* SimpleSearchResultViewController.swift */,
+				09737AD41C32391F00817C8D /* MessageArchiveSearchResultViewController.swift */,
+				095C7A201C328ECE000D2838 /* TimelineSearchResultViewController.swift */,
+				095C7A221C328EF4000D2838 /* ArticleSearchResultViewController.swift */,
+				095C7A241C328F25000D2838 /* CelebritySearchResultViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		09737AD61C32547400817C8D /* TQKit */ = {
+			isa = PBXGroup;
+			children = (
+				09737ADF1C327D4700817C8D /* TQMathUtl.swift */,
+			);
+			path = TQKit;
+			sourceTree = "<group>";
+		};
 		09C26F221C313292005CF561 /* CarthageSymbols */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +401,7 @@
 				099558C61C30F75B00355ADC /* Kingfisher.framework.dSYM */,
 				099558C41C30F75300355ADC /* Chameleon.framework.dSYM */,
 				099558C21C30F74D00355ADC /* Alamofire.framework.dSYM */,
+				09737AD91C3268DB00817C8D /* SVProgressHUD.framework.dSYM */,
 			);
 			name = CarthageSymbols;
 			sourceTree = "<group>";
@@ -522,6 +575,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 			);
 			outputPaths = (
 			);
@@ -582,14 +636,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				064060131C2EE59F0035F510 /* TextMessageTableViewCell.swift in Sources */,
+				095C7A231C328EF4000D2838 /* ArticleSearchResultViewController.swift in Sources */,
+				09737AD51C32391F00817C8D /* MessageArchiveSearchResultViewController.swift in Sources */,
+				09737AD21C32389E00817C8D /* MessageInputView.swift in Sources */,
+				095C7A1F1C328DD7000D2838 /* GlobalSearchViewController.swift in Sources */,
 				06BF9A8E1C302737005B7B72 /* MessageListView.swift in Sources */,
 				0640600E1C2EB3260035F510 /* MessageNodeView.swift in Sources */,
 				095C07281C2D16EA004D00C7 /* BadgeView.swift in Sources */,
+				09737ADC1C32705F00817C8D /* SimpleCellView.swift in Sources */,
 				061937401C2D8CA400639A40 /* TQHelper.swift in Sources */,
 				064060081C2E69EE0035F510 /* TextMessageNodeView.swift in Sources */,
+				095C7A251C328F25000D2838 /* CelebritySearchResultViewController.swift in Sources */,
 				095C07261C2D1187004D00C7 /* AvatarBadgeView.swift in Sources */,
 				095C07331C2D1B5B004D00C7 /* WBStatusComposeTextParser.m in Sources */,
+				095C7A211C328ECE000D2838 /* TimelineSearchResultViewController.swift in Sources */,
 				064060111C2EDAE10035F510 /* MultiSelectTableViewCell.swift in Sources */,
+				09737ADE1C32762A00817C8D /* SearchResultTableViewCell.swift in Sources */,
 				095C072B1C2D1A3C004D00C7 /* ImageComposer.swift in Sources */,
 				0640600C1C2E7E860035F510 /* BubbleTextView.swift in Sources */,
 				095C07321C2D1B5B004D00C7 /* WBEmoticonInputView.m in Sources */,
@@ -599,6 +661,9 @@
 				095C07371C2D1C7B004D00C7 /* WBStatusHelper.m in Sources */,
 				09C26F241C313311005CF561 /* MessageListToolbar.swift in Sources */,
 				095C07141C2D0AC3004D00C7 /* AppDelegate.swift in Sources */,
+				095C7A291C329CE8000D2838 /* GlobalSearchResultViewController.swift in Sources */,
+				095C7A271C328F9B000D2838 /* SimpleSearchResultViewController.swift in Sources */,
+				09737AE01C327D4700817C8D /* TQMathUtl.swift in Sources */,
 				095C07231C2D0FB9004D00C7 /* ConversationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -756,7 +821,6 @@
 					"$(inherited)",
 					"${PODS_ROOT}/Headers/Private/KVOController",
 					"${PODS_ROOT}/Headers/Private/YYKit",
-					"${PODS_ROOT}/Headers/Private/FDStackView",
 				);
 				INFOPLIST_FILE = FakeWeChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -783,7 +847,6 @@
 					"$(inherited)",
 					"${PODS_ROOT}/Headers/Private/KVOController",
 					"${PODS_ROOT}/Headers/Private/YYKit",
-					"${PODS_ROOT}/Headers/Private/FDStackView",
 				);
 				INFOPLIST_FILE = FakeWeChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

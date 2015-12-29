@@ -31,18 +31,6 @@ class ChatViewController: UIViewController, MessageListViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        
-        coordinator.animateAlongsideTransition({ [weak self] (context) -> Void in
-            if self == nil {
-                return
-            }
-            self!._messageListView.willTransitionToSize(size)
-            }, completion: nil)
-        
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-    }
-    
     // MARK: - Private Properties
     private lazy var _messageListView: MessageListView =  MessageListView()
     private lazy var _cancelItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: nil, action: nil)
