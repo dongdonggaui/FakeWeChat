@@ -49,7 +49,8 @@ extension UIViewController {
 
 extension UIImage {
     public static func tq_imageFromString(string: String, backgroundColor: UIColor, attributes: [String : AnyObject], size: CGSize) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(size, true, UIScreen.mainScreen().scale)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
         let context = UIGraphicsGetCurrentContext()
         CGContextSetFillColorWithColor(context, backgroundColor.CGColor)
         CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height))

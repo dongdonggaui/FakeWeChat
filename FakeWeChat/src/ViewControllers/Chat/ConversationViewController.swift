@@ -22,6 +22,14 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
         tableView.tableHeaderView = _searchController.searchBar
         tableView.contentOffset = CGPointMake(0, 44)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

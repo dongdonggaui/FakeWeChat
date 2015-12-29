@@ -28,36 +28,36 @@ class AppContext: NSObject {
     
     // MARK: - Search Resource
     static let globalSearchTextDrawAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.boldSystemFontOfSize(30)]
-    static let globalSearchIconSize = CGSizeMake(80, 80)
+    static let globalSearchIconSize = CGSizeMake(60, 60)
     static func globalSearchTimelineIcon() -> UIImage {
         return iconWithCacheKey(AppContextLocalImageCacheKey.SearchTimelineIcon, title: "圈", backgroundColor: FlatPink(), attributes: globalSearchTextDrawAttributes, size: globalSearchIconSize)
     }
     
     static func globalSearchArticleIcon() -> UIImage {
-        return iconWithCacheKey(AppContextLocalImageCacheKey.SearchTimelineIcon, title: "文", backgroundColor: FlatMint(), attributes: globalSearchTextDrawAttributes, size: globalSearchIconSize)
+        return iconWithCacheKey(AppContextLocalImageCacheKey.SearchArticleIcon, title: "文", backgroundColor: FlatMint(), attributes: globalSearchTextDrawAttributes, size: globalSearchIconSize)
     }
     
     static func globalSearchCelebrityIcon() -> UIImage {
-        return iconWithCacheKey(AppContextLocalImageCacheKey.SearchTimelineIcon, title: "众", backgroundColor: FlatSand(), attributes: globalSearchTextDrawAttributes, size: globalSearchIconSize)
+        return iconWithCacheKey(AppContextLocalImageCacheKey.SearchCelebrityIcon, title: "众", backgroundColor: FlatSand(), attributes: globalSearchTextDrawAttributes, size: globalSearchIconSize)
     }
     
     // MARK: - Message List Resource
     static let messageListViewTextDrawAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.boldSystemFontOfSize(17)]
     static let messageListViewFunctionToolbarIconSize = CGSizeMake(24, 24)
     static func redirectIcon() -> UIImage {
-        return iconWithCacheKey(AppContextLocalImageCacheKey.RedirectIcon, title: "转", backgroundColor: nil, attributes: nil, size: nil)
+        return iconWithCacheKey(AppContextLocalImageCacheKey.RedirectIcon, title: "转", backgroundColor: FlatYellow(), attributes: nil, size: nil)
     }
     
     static func collectIcon() -> UIImage {
-        return iconWithCacheKey(AppContextLocalImageCacheKey.CollectIcon, title: "藏", backgroundColor: nil, attributes: nil, size: nil)
+        return iconWithCacheKey(AppContextLocalImageCacheKey.CollectIcon, title: "藏", backgroundColor: FlatMint(), attributes: nil, size: nil)
     }
     
     static func deleteIcon() -> UIImage {
-        return iconWithCacheKey(AppContextLocalImageCacheKey.DeleteIcon, title: "删", backgroundColor: nil, attributes: nil, size: nil)
+        return iconWithCacheKey(AppContextLocalImageCacheKey.DeleteIcon, title: "删", backgroundColor: FlatRed(), attributes: nil, size: nil)
     }
     
     static func moreIcon() -> UIImage {
-        return iconWithCacheKey(AppContextLocalImageCacheKey.MoreIcon, title: "···", backgroundColor: nil, attributes: nil, size: nil)
+        return iconWithCacheKey(AppContextLocalImageCacheKey.MoreIcon, title: "···", backgroundColor: FlatMaroon(), attributes: nil, size: nil)
     }
     
     // MARK: - Utilities
@@ -65,6 +65,7 @@ class AppContext: NSObject {
         var image = imageWithCacheKey(key)
         if image == nil {
             image = UIImage.tq_imageFromString(title, backgroundColor: backgroundColor ?? UIColor.clearColor(), attributes: attributes ?? messageListViewTextDrawAttributes, size: size ?? messageListViewFunctionToolbarIconSize) ?? UIImage(color: FlatBlue(), size: size ?? messageListViewFunctionToolbarIconSize)
+            globalImageCache.storeImage(image!, originalData: UIImageJPEGRepresentation(image!, 0.9), forKey: key)
         }
         return image!
     }
@@ -75,7 +76,7 @@ class AppContext: NSObject {
         if let cacheType = cachedResult.cacheType {
             switch cacheType {
             case .Memory: cachedImage = globalImageCache.retrieveImageInMemoryCacheForKey(key)
-            case .Disk: cachedImage = globalImageCache.retrieveImageInDiskCacheForKey(key)
+            case .Disk: cachedImage = globalImageCache.retrieveImageInDiskCacheForKey(key, scale: UIScreen.mainScreen().scale)
             default: break
             }
         }

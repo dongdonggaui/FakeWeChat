@@ -43,17 +43,8 @@ class AvatarBadgeView: UIView {
         }
         
         let cacheKey = self.cacheKeyForPaths(paths)
-        let cachedResult = self.imageCache.isImageCachedForKey(cacheKey)
-        var cachedImage: UIImage? = nil
-        if let cacheType = cachedResult.cacheType {
-            switch cacheType {
-            case .Memory: cachedImage = self.imageCache.retrieveImageInMemoryCacheForKey(cacheKey)
-            case .Disk: cachedImage = self.imageCache.retrieveImageInDiskCacheForKey(cacheKey)
-            default: break
-            }
-        }
-        if let sCachedImage = cachedImage {
-            self.avatarImageView.image = sCachedImage
+        if let cachedImage = AppContext.imageWithCacheKey(cacheKey) {
+            self.avatarImageView.image = cachedImage
             completion?()
             return;
         }

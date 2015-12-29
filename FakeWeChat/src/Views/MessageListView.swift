@@ -213,10 +213,6 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
             make.leading.trailing.equalTo(self)
             make.height.equalTo(MLVLayoutInfo.ToolbarHeight)
         }
-//        _searchController.searchBar.snp_makeConstraints { (make) -> Void in
-//            make.leading.top.width.height.equalTo(_searchBar)
-//        }
-        _searchController.searchBar.sizeToFit()
         
         tableView.registerClass(TextMessageTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.estimatedRowHeight = 60.0
@@ -263,10 +259,7 @@ class MessageListView : UIView, UITableViewDataSource, UITableViewDelegate, UIGe
         }
         
         let updateOtherViews = {[weak self] () -> Void in
-            if self == nil {
-                return
-            }
-            self!.layoutIfNeeded()
+            self?.layoutIfNeeded()
         }
         
         if editing {

@@ -9,57 +9,50 @@
 import UIKit
 import SnapKit
 
+struct GSVLayoutInfo {
+    static let TopMarginInitialRegular = CGFloat(144)
+    static let TopMarginRegular = CGFloat(100)
+    static let TopMarginInitialCompact = CGFloat(112)
+    static let TopMarginCompact = CGFloat(68)
+    static let ContentHeight = CGFloat(80)
+    
+    static let ContentFontSize = CGFloat(12)
+    static let ContentPadding = CGFloat(5)
+}
+
+struct GSContentTitle {
+    static let Timeline = NSLocalizedString("朋友圈", comment: "Timeline")
+    static let Article = NSLocalizedString("文章", comment: "Articel")
+    static let Celebrity = NSLocalizedString("公众号", comment: "Celebrity")
+}
+
+enum GSButtonTag : Int {
+    case Unknown = 0
+    case Timeline = 1
+    case Article = 2
+    case Celebrity = 3
+}
+
 class GlobalSearchViewController: UISearchController {
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(_blurBackgrounView)
+        _blurBackgrounView.snp_makeConstraints { (make) -> Void in
+            make.edges.equalTo(view)
+        }
+        
         let stackView = UIStackView()
         stackView.alignment = .Center
-        stackView.distribution = .EqualSpacing
+        stackView.distribution = .FillEqually
         stackView.layoutMargins = UIEdgeInsetsMake(0, 20, 0, 20)
         stackView.layoutMarginsRelativeArrangement = true
-        stackView.backgroundColor = UIColor.flatBlueColor()
         
-        let timelineButton = UIButton(type: .Custom)
-        timelineButton.setImage(AppContext.globalSearchTimelineIcon(), forState: .Normal)
-        let timelineLabel = UILabel()
-        timelineLabel.text = "朋友圈"
-        timelineLabel.font = UIFont.systemFontOfSize(12)
-        timelineLabel.textColor = UIColor.grayColor()
-        let timelineStackView = UIStackView()
-        timelineStackView.axis = .Vertical
-        timelineStackView.alignment = .Center
-        timelineStackView.spacing = 5
-        timelineStackView.addArrangedSubview(timelineButton)
-        timelineStackView.addArrangedSubview(timelineLabel)
-        
-        let articleButton = UIButton(type: .Custom)
-        articleButton.setImage(AppContext.globalSearchArticleIcon(), forState: .Normal)
-        let articleLabel = UILabel()
-        articleLabel.text = "文章"
-        articleLabel.font = UIFont.systemFontOfSize(12)
-        articleLabel.textColor = UIColor.grayColor()
-        let articleStackView = UIStackView()
-        articleStackView.axis = .Vertical
-        articleStackView.alignment = .Center
-        articleStackView.spacing = 5
-        articleStackView.addArrangedSubview(articleButton)
-        articleStackView.addArrangedSubview(articleLabel)
-        
-        let celebrityButton = UIButton(type: .Custom)
-        celebrityButton.setImage(AppContext.globalSearchCelebrityIcon(), forState: .Normal)
-        let celebrityLabel = UILabel()
-        celebrityLabel.text = "公众号"
-        celebrityLabel.font = UIFont.systemFontOfSize(12)
-        celebrityLabel.textColor = UIColor.grayColor()
-        let celebrityStackView = UIStackView()
-        celebrityStackView.axis = .Vertical
-        celebrityStackView.alignment = .Center
-        celebrityStackView.spacing = 5
-        celebrityStackView.addArrangedSubview(celebrityButton)
-        celebrityStackView.addArrangedSubview(celebrityLabel)
+        let timelineStackView = _buttonViewWithImage(AppContext.globalSearchTimelineIcon(), text: GSContentTitle.Timeline, buttonTag: .Timeline)
+        let articleStackView = _buttonViewWithImage(AppContext.globalSearchArticleIcon(), text: GSContentTitle.Article, buttonTag: .Article)
+        let celebrityStackView = _buttonViewWithImage(AppContext.globalSearchCelebrityIcon(), text: GSContentTitle.Celebrity, buttonTag: .Celebrity)
         
         stackView.addArrangedSubview(timelineStackView)
         stackView.addArrangedSubview(articleStackView)
@@ -67,9 +60,9 @@ class GlobalSearchViewController: UISearchController {
         
         view.addSubview(stackView)
         stackView.snp_makeConstraints { (make) -> Void in
-            contextTopMarginConstrait = make.top.equalTo(100).constraint
+            _contextTopMarginConstrait = make.top.equalTo(GSVLayoutInfo.TopMarginInitialRegular).constraint
             make.leading.trailing.equalTo(view)
-            make.height.equalTo(100)
+            make.height.equalTo(GSVLayoutInfo.ContentHeight)
         }
     }
     
@@ -79,16 +72,64 @@ class GlobalSearchViewController: UISearchController {
                 return
             }
             if self!.tq_isMinimumWindowHeight() {
-                self!.contextTopMarginConstrait?.updateOffset(68)
+                self!._contextTopMarginConstrait?.updateOffset(GSVLayoutInfo.TopMarginCompact)
             } else {
-                self!.contextTopMarginConstrait?.updateOffset(100)
+                self!._contextTopMarginConstrait?.updateOffset(GSVLayoutInfo.TopMarginRegular)
             }
             }, completion: { [weak self] (context) -> Void in
                 self?.view.layoutIfNeeded()
         })
     }
     
+    override func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+        super.animateTransition(transitionContext)
+        
+        //TODO: update animation
+    }
+    
     // MARK: - Properties
-    private var contextTopMarginConstrait: Constraint?
+    private var _contextTopMarginConstrait: Constraint?
+    private lazy var _blurBackgrounView: UIVisualEffectView = {
+        let blur = UIBlurEffect(style: .Light)
+        let view = UIVisualEffectView(effect: blur)
+        return view
+    }()
+    
+    // MARK: - Event Response
+    func buttonTapped(sender: UIButton) {
+        
+        let tag = GSButtonTag(rawValue: sender.tag) ?? .Unknown
+        switch tag {
+        case .Timeline:
+            print("timeline")
+        case .Article:
+            print("article")
+        case .Celebrity:
+            print("celebrity")
+        case .Unknown:
+            break
+        }
+    }
+    
+    // MARK: - Private Methods
+    private func _buttonViewWithImage(image: UIImage, text: String, buttonTag: GSButtonTag) -> UIStackView {
+        
+        let button = UIButton(type: .Custom)
+        button.tag = buttonTag.rawValue
+        button.setImage(image, forState: .Normal)
+        button.addTarget(self, action: "buttonTapped:", forControlEvents: .TouchUpInside)
+        let label = UILabel()
+        label.text = text
+        label.font = UIFont.systemFontOfSize(GSVLayoutInfo.ContentFontSize)
+        label.textColor = UIColor.grayColor()
+        let stackView = UIStackView()
+        stackView.axis = .Vertical
+        stackView.alignment = .Center
+        stackView.spacing = GSVLayoutInfo.ContentPadding
+        stackView.addArrangedSubview(button)
+        stackView.addArrangedSubview(label)
+        
+        return stackView
+    }
 
 }
