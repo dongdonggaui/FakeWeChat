@@ -29,6 +29,7 @@ class AppContext: NSObject {
     // MARK: - Search Resource
     static let globalSearchTextDrawAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.boldSystemFontOfSize(30)]
     static let globalSearchIconSize = CGSizeMake(60, 60)
+    static let globalSearchTintColor = FlatSkyBlueDark()
     static func globalSearchTimelineIcon() -> UIImage {
         return iconWithCacheKey(AppContextLocalImageCacheKey.SearchTimelineIcon, title: "圈", backgroundColor: FlatPink(), attributes: globalSearchTextDrawAttributes, size: globalSearchIconSize)
     }

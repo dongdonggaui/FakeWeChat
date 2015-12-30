@@ -8,26 +8,38 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ConversationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var _tableView: UITableView!
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "聊天";
-        tableView.tableFooterView = UIView()
-        tableView.estimatedRowHeight = 67
-        tableView.tableHeaderView = _searchController.searchBar
-        tableView.contentOffset = CGPointMake(0, 44)
+        _searchBar.height = 44
+        _searchBar.translucent = true
+        _searchBar.barTintColor = UIColor.flatWhiteColor()
+        _searchBar.delegate = self
+        _searchBar.placeholder = NSLocalizedString("搜索", comment: "Search Placeholder")
+        _tableView.tableFooterView = UIView()
+        _tableView.estimatedRowHeight = 67
+        _tableView.tableHeaderView = _searchBar
+        _tableView.contentOffset = CGPointMake(0, 44)
+        
+        let testItem = UIBarButtonItem(title: "test", style: .Plain, target: self, action: "test")
+        navigationItem.rightBarButtonItem = testItem
+    }
+    
+    func test() {
+//        _searchController.searchBar.becomeFirstResponder()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+        if let selectedIndexPath = _tableView.indexPathForSelectedRow {
+            _tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
     }
 
@@ -78,7 +90,14 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
+    // MARK: - UISearchBarDelegate
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        presentViewController(_searchController, animated: true, completion: nil)
+        return false
+    }
+    
     // MARK: - Private Properties
+    private lazy var _searchBar = UISearchBar()
     private lazy var _searchResultViewController = GlobalSearchResultViewController()
     private lazy var _searchController: GlobalSearchViewController = {
         let sc = GlobalSearchViewController(searchResultsController: self._searchResultViewController)

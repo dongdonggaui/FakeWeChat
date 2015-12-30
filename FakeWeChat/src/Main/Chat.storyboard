@@ -134,7 +134,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="tableView" destination="sVS-Uo-Yu3" id="9zg-1m-aTs"/>
+                        <outlet property="_tableView" destination="sVS-Uo-Yu3" id="P9G-ku-mDn"/>
                         <segue destination="rJQ-OU-DBs" kind="show" identifier="showChat" id="tbQ-Dv-v2d"/>
                     </connections>
                 </viewController>
