@@ -15,6 +15,9 @@
 		064060111C2EDAE10035F510 /* MultiSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064060101C2EDAE10035F510 /* MultiSelectTableViewCell.swift */; };
 		064060131C2EE59F0035F510 /* TextMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064060121C2EE59F0035F510 /* TextMessageTableViewCell.swift */; };
 		06BF9A8E1C302737005B7B72 /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF9A8D1C302737005B7B72 /* MessageListView.swift */; };
+		06CB0EA11C341F730016A3CA /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CB0EA01C341F730016A3CA /* ContactsViewController.swift */; };
+		06CB0EA31C341FC00016A3CA /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CB0EA21C341FC00016A3CA /* TimelineViewController.swift */; };
+		06CB0EA51C341FF70016A3CA /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CB0EA41C341FF70016A3CA /* MoreViewController.swift */; };
 		095C06E81C2D08D7004D00C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095C06E61C2D08D7004D00C7 /* Main.storyboard */; };
 		095C06EA1C2D08D7004D00C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 095C06E91C2D08D7004D00C7 /* Assets.xcassets */; };
 		095C06ED1C2D08D7004D00C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095C06EB1C2D08D7004D00C7 /* LaunchScreen.storyboard */; };
@@ -104,6 +107,9 @@
 		064060101C2EDAE10035F510 /* MultiSelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSelectTableViewCell.swift; sourceTree = "<group>"; };
 		064060121C2EE59F0035F510 /* TextMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMessageTableViewCell.swift; sourceTree = "<group>"; };
 		06BF9A8D1C302737005B7B72 /* MessageListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListView.swift; sourceTree = "<group>"; };
+		06CB0EA01C341F730016A3CA /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactsViewController.swift; path = FakeWeChat/src/Views/ContactsViewController.swift; sourceTree = SOURCE_ROOT; };
+		06CB0EA21C341FC00016A3CA /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = FakeWeChat/src/Views/TimelineViewController.swift; sourceTree = SOURCE_ROOT; };
+		06CB0EA41C341FF70016A3CA /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreViewController.swift; path = FakeWeChat/src/Views/MoreViewController.swift; sourceTree = SOURCE_ROOT; };
 		095C06DF1C2D08D7004D00C7 /* FakeWeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FakeWeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		095C06E71C2D08D7004D00C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		095C06E91C2D08D7004D00C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Assets.xcassets; sourceTree = "<group>"; };
@@ -299,6 +305,7 @@
 		095C071F1C2D0D97004D00C7 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				06CB0EA01C341F730016A3CA /* ContactsViewController.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -306,6 +313,7 @@
 		095C07201C2D0D97004D00C7 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				06CB0EA41C341FF70016A3CA /* MoreViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -313,6 +321,7 @@
 		095C07211C2D0D97004D00C7 /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
+				06CB0EA21C341FC00016A3CA /* TimelineViewController.swift */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -648,7 +657,9 @@
 				064060081C2E69EE0035F510 /* TextMessageNodeView.swift in Sources */,
 				095C7A251C328F25000D2838 /* CelebritySearchResultViewController.swift in Sources */,
 				095C07261C2D1187004D00C7 /* AvatarBadgeView.swift in Sources */,
+				06CB0EA31C341FC00016A3CA /* TimelineViewController.swift in Sources */,
 				095C07331C2D1B5B004D00C7 /* WBStatusComposeTextParser.m in Sources */,
+				06CB0EA51C341FF70016A3CA /* MoreViewController.swift in Sources */,
 				095C7A211C328ECE000D2838 /* TimelineSearchResultViewController.swift in Sources */,
 				064060111C2EDAE10035F510 /* MultiSelectTableViewCell.swift in Sources */,
 				09737ADE1C32762A00817C8D /* SearchResultTableViewCell.swift in Sources */,
@@ -665,6 +676,7 @@
 				095C7A271C328F9B000D2838 /* SimpleSearchResultViewController.swift in Sources */,
 				09737AE01C327D4700817C8D /* TQMathUtl.swift in Sources */,
 				095C07231C2D0FB9004D00C7 /* ConversationViewController.swift in Sources */,
+				06CB0EA11C341F730016A3CA /* ContactsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,8 +18,7 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
 
         title = "聊天";
         _searchBar.height = 44
-        _searchBar.translucent = true
-        _searchBar.barTintColor = UIColor.flatWhiteColor()
+        _searchBar.searchBarStyle = .Minimal
         _searchBar.delegate = self
         _searchBar.placeholder = NSLocalizedString("搜索", comment: "Search Placeholder")
         _tableView.tableFooterView = UIView()
@@ -27,12 +26,9 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
         _tableView.tableHeaderView = _searchBar
         _tableView.contentOffset = CGPointMake(0, 44)
         
-        let testItem = UIBarButtonItem(title: "test", style: .Plain, target: self, action: "test")
-        navigationItem.rightBarButtonItem = testItem
-    }
-    
-    func test() {
-//        _searchController.searchBar.becomeFirstResponder()
+        navigationController?.view.backgroundColor = UIColor.whiteColor()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addButtonTapped:")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -94,6 +90,11 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         presentViewController(_searchController, animated: true, completion: nil)
         return false
+    }
+    
+    // MARK: - Event Response
+    func addButtonTapped(sender: UIBarButtonItem) {
+        
     }
     
     // MARK: - Private Properties

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LSG-Gh-dfR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LSG-Gh-dfR">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--Item-->
@@ -13,7 +12,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5rk-wV-Ivj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="WRs-6y-i05" kind="relationship" relationship="rootViewController" id="eYp-fL-edu"/>
@@ -23,10 +21,10 @@
             </objects>
             <point key="canvasLocation" x="1210" y="-215"/>
         </scene>
-        <!--View Controller-->
+        <!--More View Controller-->
         <scene sceneID="vSY-fb-3Ap">
             <objects>
-                <viewController id="WRs-6y-i05" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoreViewController" id="WRs-6y-i05" customClass="MoreViewController" customModule="FakeWeChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kZx-In-WDO"/>
                         <viewControllerLayoutGuide type="bottom" id="Nqm-Eb-eE4"/>
@@ -34,7 +32,6 @@
                     <view key="view" contentMode="scaleToFill" id="e4n-Qz-5uq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="h6q-ZR-5YM"/>
