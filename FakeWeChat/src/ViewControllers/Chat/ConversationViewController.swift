@@ -13,10 +13,17 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var _tableView: UITableView!
     
     // MARK: - Life Cycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        title = "聊天";
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = "聊天";
+        
+        navigationController?.view.backgroundColor = UIColor.whiteColor()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addButtonTapped:")
+        
         _searchBar.height = 44
         _searchBar.searchBarStyle = .Minimal
         _searchBar.delegate = self
@@ -25,10 +32,6 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
         _tableView.estimatedRowHeight = 67
         _tableView.tableHeaderView = _searchBar
         _tableView.contentOffset = CGPointMake(0, 44)
-        
-        navigationController?.view.backgroundColor = UIColor.whiteColor()
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addButtonTapped:")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -94,14 +97,20 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
     
     // MARK: - Event Response
     func addButtonTapped(sender: UIBarButtonItem) {
-        
+        _viewLoader.showPopupMenu(inRect: CGRectMake(view.width - 44.5, 64, 40, 2))
     }
     
     // MARK: - Private Properties
+    private lazy var _popupMenuItems: [KxMenuItem] = []
     private lazy var _searchBar = UISearchBar()
     private lazy var _searchResultViewController = GlobalSearchResultViewController()
     private lazy var _searchController: GlobalSearchViewController = {
         let sc = GlobalSearchViewController(searchResultsController: self._searchResultViewController)
         return sc
     }()
+    private lazy var _viewLoader: ConversationViewLoader = {
+        let vl = ConversationViewLoader(withViewController: self)
+        return vl
+    }()
+    
 }

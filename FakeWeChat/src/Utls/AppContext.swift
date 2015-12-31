@@ -10,51 +10,20 @@ import UIKit
 import Chameleon
 import Kingfisher
 
-extension CGSize {
-    static func size(type: AppContext.IconSizeType) -> CGSize {
-        switch type {
-        case .Small:
-            return CGSizeMake(14, 14)
-        case .Middle:
-            return CGSizeMake(30, 30)
-        case .Big:
-            return CGSizeMake(60, 60)
-        }
-    }
-}
-
-extension CGFloat {
-    static func fontSize(type: AppContext.IconSizeType) -> CGFloat {
-        switch type {
-        case .Small:
-            return CGFloat(14)
-        case .Middle:
-            return CGFloat(17)
-        case .Big:
-            return CGFloat(30)
-        }
-    }
-}
-
-extension String {
-    func cacheKey(type: AppContext.IconSizeType) -> String {
-        switch type {
-        case .Small:
-            return "\(self)_small"
-        case .Middle:
-            return "\(self)_middle"
-        case .Big:
-            return "\(self)_big"
-        }
-    }
-}
-
 class AppContext : NSObject {
     
     enum IconSizeType : Int {
+        case Smallest
         case Small
         case Middle
         case Big
+        case Biggest
+    }
+    
+    enum IconStyle : Int {
+        case Square
+        case Round
+        case RoundCorner
     }
     
     struct ImageCacheKey {
@@ -71,53 +40,59 @@ class AppContext : NSObject {
     // MARK: - Global Resource
     static let globalImageCache = KingfisherManager.sharedManager.cache
     
+    // MARK: - Conversation
+    
     // MARK: - Search Resource
     static let globalSearchTintColor = FlatSkyBlueDark()
-    static func globalSearchTimelineIcon(sizeType: IconSizeType = .Big) -> UIImage {
-        return iconWithCacheKey(ImageCacheKey.SearchTimelineIcon, title: "圈", sizeType: sizeType, bold: true, backgroundColor: FlatPink(), foregroundColor: UIColor.whiteColor())
+    static func globalSearchTimelineIcon(sizeType: IconSizeType = .Biggest) -> UIImage {
+        return clearIcon(withTitle: "圈", sizeType: sizeType).backgrounded(FlatBlue())
     }
     
-    static func globalSearchArticleIcon(sizeType: IconSizeType = .Big) -> UIImage {
-        return iconWithCacheKey(ImageCacheKey.SearchArticleIcon, title: "文", sizeType: sizeType, bold: true, backgroundColor: FlatMint(), foregroundColor: UIColor.whiteColor())
+    static func globalSearchArticleIcon(sizeType: IconSizeType = .Biggest) -> UIImage {
+        return clearIcon(withTitle: "文", sizeType: sizeType).backgrounded(FlatPink())
     }
     
-    static func globalSearchCelebrityIcon(sizeType: IconSizeType = .Big) -> UIImage {
-        return iconWithCacheKey(ImageCacheKey.SearchCelebrityIcon, title: "众", sizeType: sizeType, bold: true, backgroundColor: FlatSand(), foregroundColor: UIColor.whiteColor())
+    static func globalSearchCelebrityIcon(sizeType: IconSizeType = .Biggest) -> UIImage {
+        return clearIcon(withTitle: "众", sizeType: sizeType).backgrounded(FlatSand())
     }
     
     // MARK: - Message List Resource
     static let messageListViewTextDrawAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.boldSystemFontOfSize(17)]
     static let messageListViewFunctionToolbarIconSize = CGSizeMake(24, 24)
     static func redirectIcon() -> UIImage {
-        return iconWithCacheKey(ImageCacheKey.RedirectIcon, title: "转", bold: true, backgroundColor: FlatYellow(), foregroundColor: UIColor.whiteColor(), size: CGSizeMake(24, 24), fontSize: 17)
+        return icon(withTitle: "转", sizeType: .Big, style: .RoundCorner)
     }
     
     static func collectIcon() -> UIImage {
-        return iconWithCacheKey(ImageCacheKey.CollectIcon, title: "藏", bold: true, backgroundColor: FlatMint(), foregroundColor: UIColor.whiteColor(), size: CGSizeMake(24, 24), fontSize: 17)
+        return icon(withTitle: "藏", sizeType: .Big, style: .RoundCorner)
     }
     
     static func deleteIcon() -> UIImage {
-        return iconWithCacheKey(ImageCacheKey.DeleteIcon, title: "删", bold: true, backgroundColor: FlatRed(), foregroundColor: UIColor.whiteColor(), size: CGSizeMake(24, 24), fontSize: 17)
+        return icon(withTitle: "删", sizeType: .Big, style: .RoundCorner)
     }
     
     static func moreIcon() -> UIImage {
-        return iconWithCacheKey(ImageCacheKey.MoreIcon, title: "···", bold: true, backgroundColor: FlatMaroon(), foregroundColor: UIColor.whiteColor(), size: CGSizeMake(24, 24), fontSize: 17)
+        return icon(withTitle: "···", sizeType: .Big, style: .RoundCorner)
     }
     
-    // MARK: - Utilities
-    static func iconWithCacheKey(key: String, title: String, bold: Bool? = false, backgroundColor: UIColor? = UIColor.whiteColor(), foregroundColor: UIColor? = UIColor.blackColor(), size: CGSize? = CGSizeMake(60, 60), fontSize: CGFloat? = 30) -> UIImage {
-        var image = imageWithCacheKey(key)
+    // MARK: - Utilities    
+    static func clearIcon(withTitle title: String, sizeType: IconSizeType = .Middle) -> UIImage {
+        
+        return icon(withTitle: title, sizeType: sizeType, style: .Square, backgroundColor: UIColor.clearColor(), foregroundColor: UIColor.whiteColor())
+    }
+    
+    static func icon(withTitle title: String, sizeType: IconSizeType = .Big, style: IconStyle = .Round, backgroundColor: UIColor = FlatBlue(), foregroundColor: UIColor = UIColor.whiteColor()) -> UIImage {
+        
+        let firstChar = title.substringToIndex(title.startIndex.advancedBy(1))
+        let cacheKey = firstChar.cacheKey(sizeType)
+        var image = imageWithCacheKey(cacheKey)
         if image == nil {
-            let attributes = [NSForegroundColorAttributeName: foregroundColor!, NSFontAttributeName: bold! ? UIFont.boldSystemFontOfSize(fontSize!) : UIFont.systemFontOfSize(fontSize!)]
-            image = UIImage.tq_imageFromString(title, backgroundColor: backgroundColor!, attributes: attributes, size: size!) ?? UIImage(color: FlatBlue(), size: size!)
-            globalImageCache.storeImage(image!, originalData: UIImageJPEGRepresentation(image!, 0.9), forKey: key)
+            let imageSize = CGSize.size(sizeType)
+            let attributes = [NSForegroundColorAttributeName: foregroundColor, NSFontAttributeName: UIFont.boldSystemFontOfSize(CGFloat.fontSize(sizeType))]
+            image = UIImage.tq_imageFromString(title, backgroundColor: backgroundColor, attributes: attributes, size: imageSize) ?? UIImage(color: foregroundColor, size: imageSize)
+            globalImageCache.storeImage(image!, originalData: UIImagePNGRepresentation(image!), forKey: cacheKey)
         }
         return image!
-    }
-    
-    static func iconWithCacheKey(key: String, title: String, sizeType: IconSizeType, bold: Bool? = false, backgroundColor: UIColor? = UIColor.whiteColor(), foregroundColor: UIColor? = UIColor.blackColor()) -> UIImage {
-        
-        return iconWithCacheKey(key.cacheKey(sizeType), title: title, bold: bold, backgroundColor: backgroundColor, foregroundColor: foregroundColor, size: CGSize.size(sizeType), fontSize: CGFloat.fontSize(sizeType))
     }
     
     static func imageWithCacheKey(key: String) -> UIImage? {

@@ -42,6 +42,7 @@
 		095C7A251C328F25000D2838 /* CelebritySearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C7A241C328F25000D2838 /* CelebritySearchResultViewController.swift */; };
 		095C7A271C328F9B000D2838 /* SimpleSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C7A261C328F9B000D2838 /* SimpleSearchResultViewController.swift */; };
 		095C7A291C329CE8000D2838 /* GlobalSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C7A281C329CE8000D2838 /* GlobalSearchResultViewController.swift */; };
+		0963E1091C34BA1600F4D36D /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0963E1081C34BA1600F4D36D /* KxMenu.m */; };
 		09737AD21C32389E00817C8D /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09737AD11C32389E00817C8D /* MessageInputView.swift */; };
 		09737AD51C32391F00817C8D /* MessageArchiveSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09737AD41C32391F00817C8D /* MessageArchiveSearchResultViewController.swift */; };
 		09737ADA1C3268DB00817C8D /* SVProgressHUD.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 09737AD91C3268DB00817C8D /* SVProgressHUD.framework.dSYM */; };
@@ -58,6 +59,8 @@
 		099558D11C30F84000355ADC /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099558D01C30F84000355ADC /* Kingfisher.framework */; };
 		099558D31C30F84400355ADC /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099558D21C30F84400355ADC /* SnapKit.framework */; };
 		099558D51C30F84900355ADC /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099558D41C30F84900355ADC /* SwiftyJSON.framework */; };
+		09BE43B41C34ED4E00B4DBDC /* ConversationViewLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BE43B31C34ED4E00B4DBDC /* ConversationViewLoader.swift */; };
+		09BE43B61C34FC9D00B4DBDC /* AppContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BE43B51C34FC9D00B4DBDC /* AppContextExtensions.swift */; };
 		09C26F241C313311005CF561 /* MessageListToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C26F231C313311005CF561 /* MessageListToolbar.swift */; };
 		09C26F261C31344F005CF561 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C26F251C31344F005CF561 /* AppContext.swift */; };
 		4F3F46307628D25E6DC5206D /* Pods_FakeWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B60BC8438D6F430472A1864 /* Pods_FakeWeChat.framework */; };
@@ -145,6 +148,8 @@
 		095C7A241C328F25000D2838 /* CelebritySearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebritySearchResultViewController.swift; sourceTree = "<group>"; };
 		095C7A261C328F9B000D2838 /* SimpleSearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSearchResultViewController.swift; sourceTree = "<group>"; };
 		095C7A281C329CE8000D2838 /* GlobalSearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSearchResultViewController.swift; sourceTree = "<group>"; };
+		0963E1071C34BA1600F4D36D /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
+		0963E1081C34BA1600F4D36D /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
 		09737AD11C32389E00817C8D /* MessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
 		09737AD41C32391F00817C8D /* MessageArchiveSearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageArchiveSearchResultViewController.swift; sourceTree = "<group>"; };
 		09737AD91C3268DB00817C8D /* SVProgressHUD.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SVProgressHUD.framework.dSYM; path = Carthage/Build/iOS/SVProgressHUD.framework.dSYM; sourceTree = "<group>"; };
@@ -161,6 +166,8 @@
 		099558D01C30F84000355ADC /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		099558D21C30F84400355ADC /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		099558D41C30F84900355ADC /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		09BE43B31C34ED4E00B4DBDC /* ConversationViewLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewLoader.swift; sourceTree = "<group>"; };
+		09BE43B51C34FC9D00B4DBDC /* AppContextExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContextExtensions.swift; sourceTree = "<group>"; };
 		09C26F231C313311005CF561 /* MessageListToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListToolbar.swift; sourceTree = "<group>"; };
 		09C26F251C31344F005CF561 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		2DBD7506C823E77277F44EE9 /* Pods-FakeWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FakeWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FakeWeChat/Pods-FakeWeChat.release.xcconfig"; sourceTree = "<group>"; };
@@ -297,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				095C07221C2D0FB9004D00C7 /* ConversationViewController.swift */,
+				09BE43B31C34ED4E00B4DBDC /* ConversationViewLoader.swift */,
 				064060091C2E7ACD0035F510 /* ChatViewController.swift */,
 			);
 			path = Chat;
@@ -350,6 +358,7 @@
 				095C072A1C2D1A3C004D00C7 /* ImageComposer.swift */,
 				0619373F1C2D8CA400639A40 /* TQHelper.swift */,
 				09C26F251C31344F005CF561 /* AppContext.swift */,
+				09BE43B51C34FC9D00B4DBDC /* AppContextExtensions.swift */,
 			);
 			name = Utls;
 			path = src/Utls;
@@ -358,6 +367,7 @@
 		095C072C1C2D1B29004D00C7 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				0963E1061C34BA1600F4D36D /* KxMenu */,
 				09737AD61C32547400817C8D /* TQKit */,
 				095C072D1C2D1B5B004D00C7 /* YYKitExtension */,
 			);
@@ -378,6 +388,15 @@
 				095C07361C2D1C7B004D00C7 /* WBStatusHelper.m */,
 			);
 			path = YYKitExtension;
+			sourceTree = "<group>";
+		};
+		0963E1061C34BA1600F4D36D /* KxMenu */ = {
+			isa = PBXGroup;
+			children = (
+				0963E1071C34BA1600F4D36D /* KxMenu.h */,
+				0963E1081C34BA1600F4D36D /* KxMenu.m */,
+			);
+			path = KxMenu;
 			sourceTree = "<group>";
 		};
 		09737AD31C32390F00817C8D /* Search */ = {
@@ -667,6 +686,7 @@
 				0640600C1C2E7E860035F510 /* BubbleTextView.swift in Sources */,
 				095C07321C2D1B5B004D00C7 /* WBEmoticonInputView.m in Sources */,
 				095C073A1C2D1CAC004D00C7 /* WBModel.m in Sources */,
+				09BE43B41C34ED4E00B4DBDC /* ConversationViewLoader.swift in Sources */,
 				09C26F261C31344F005CF561 /* AppContext.swift in Sources */,
 				0640600A1C2E7ACD0035F510 /* ChatViewController.swift in Sources */,
 				095C07371C2D1C7B004D00C7 /* WBStatusHelper.m in Sources */,
@@ -675,8 +695,10 @@
 				095C7A291C329CE8000D2838 /* GlobalSearchResultViewController.swift in Sources */,
 				095C7A271C328F9B000D2838 /* SimpleSearchResultViewController.swift in Sources */,
 				09737AE01C327D4700817C8D /* TQMathUtl.swift in Sources */,
+				0963E1091C34BA1600F4D36D /* KxMenu.m in Sources */,
 				095C07231C2D0FB9004D00C7 /* ConversationViewController.swift in Sources */,
 				06CB0EA11C341F730016A3CA /* ContactsViewController.swift in Sources */,
+				09BE43B61C34FC9D00B4DBDC /* AppContextExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
