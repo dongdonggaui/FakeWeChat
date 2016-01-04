@@ -31,7 +31,7 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
         _tableView.tableFooterView = UIView()
         _tableView.estimatedRowHeight = 67
         _tableView.tableHeaderView = _searchBar
-        _tableView.contentOffset = CGPointMake(0, 44)
+//        _tableView.contentOffset = CGPointMake(0, 44)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -106,6 +106,7 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
     private lazy var _searchResultViewController = GlobalSearchResultViewController()
     private lazy var _searchController: GlobalSearchViewController = {
         let sc = GlobalSearchViewController(searchResultsController: self._searchResultViewController)
+        sc.searchResultsUpdater = self._searchResultViewController
         return sc
     }()
     private lazy var _viewLoader: ConversationViewLoader = {

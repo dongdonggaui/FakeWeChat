@@ -14,6 +14,8 @@
 		0640600E1C2EB3260035F510 /* MessageNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640600D1C2EB3260035F510 /* MessageNodeView.swift */; };
 		064060111C2EDAE10035F510 /* MultiSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064060101C2EDAE10035F510 /* MultiSelectTableViewCell.swift */; };
 		064060131C2EE59F0035F510 /* TextMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064060121C2EE59F0035F510 /* TextMessageTableViewCell.swift */; };
+		069453141C35E64E00FDC4D0 /* SimulatePushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069453131C35E64E00FDC4D0 /* SimulatePushTransition.swift */; };
+		06B9A35D1C3A576000BB076F /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B9A35C1C3A576000BB076F /* SearchNavigationController.swift */; };
 		06BF9A8E1C302737005B7B72 /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF9A8D1C302737005B7B72 /* MessageListView.swift */; };
 		06CB0EA11C341F730016A3CA /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CB0EA01C341F730016A3CA /* ContactsViewController.swift */; };
 		06CB0EA31C341FC00016A3CA /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CB0EA21C341FC00016A3CA /* TimelineViewController.swift */; };
@@ -109,6 +111,8 @@
 		0640600D1C2EB3260035F510 /* MessageNodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNodeView.swift; sourceTree = "<group>"; };
 		064060101C2EDAE10035F510 /* MultiSelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSelectTableViewCell.swift; sourceTree = "<group>"; };
 		064060121C2EE59F0035F510 /* TextMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMessageTableViewCell.swift; sourceTree = "<group>"; };
+		069453131C35E64E00FDC4D0 /* SimulatePushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulatePushTransition.swift; sourceTree = "<group>"; };
+		06B9A35C1C3A576000BB076F /* SearchNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
 		06BF9A8D1C302737005B7B72 /* MessageListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListView.swift; sourceTree = "<group>"; };
 		06CB0EA01C341F730016A3CA /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactsViewController.swift; path = FakeWeChat/src/Views/ContactsViewController.swift; sourceTree = SOURCE_ROOT; };
 		06CB0EA21C341FC00016A3CA /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = FakeWeChat/src/Views/TimelineViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -359,6 +363,7 @@
 				0619373F1C2D8CA400639A40 /* TQHelper.swift */,
 				09C26F251C31344F005CF561 /* AppContext.swift */,
 				09BE43B51C34FC9D00B4DBDC /* AppContextExtensions.swift */,
+				069453131C35E64E00FDC4D0 /* SimulatePushTransition.swift */,
 			);
 			name = Utls;
 			path = src/Utls;
@@ -409,6 +414,7 @@
 				095C7A201C328ECE000D2838 /* TimelineSearchResultViewController.swift */,
 				095C7A221C328EF4000D2838 /* ArticleSearchResultViewController.swift */,
 				095C7A241C328F25000D2838 /* CelebritySearchResultViewController.swift */,
+				06B9A35C1C3A576000BB076F /* SearchNavigationController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -665,6 +671,7 @@
 			files = (
 				064060131C2EE59F0035F510 /* TextMessageTableViewCell.swift in Sources */,
 				095C7A231C328EF4000D2838 /* ArticleSearchResultViewController.swift in Sources */,
+				06B9A35D1C3A576000BB076F /* SearchNavigationController.swift in Sources */,
 				09737AD51C32391F00817C8D /* MessageArchiveSearchResultViewController.swift in Sources */,
 				09737AD21C32389E00817C8D /* MessageInputView.swift in Sources */,
 				095C7A1F1C328DD7000D2838 /* GlobalSearchViewController.swift in Sources */,
@@ -679,6 +686,7 @@
 				06CB0EA31C341FC00016A3CA /* TimelineViewController.swift in Sources */,
 				095C07331C2D1B5B004D00C7 /* WBStatusComposeTextParser.m in Sources */,
 				06CB0EA51C341FF70016A3CA /* MoreViewController.swift in Sources */,
+				069453141C35E64E00FDC4D0 /* SimulatePushTransition.swift in Sources */,
 				095C7A211C328ECE000D2838 /* TimelineSearchResultViewController.swift in Sources */,
 				064060111C2EDAE10035F510 /* MultiSelectTableViewCell.swift in Sources */,
 				09737ADE1C32762A00817C8D /* SearchResultTableViewCell.swift in Sources */,

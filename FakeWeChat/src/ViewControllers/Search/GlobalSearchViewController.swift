@@ -71,7 +71,7 @@ enum GSState : Int {
     case ActiveCompact
 }
 
-class GlobalSearchViewController: UISearchController, UISearchBarDelegate {
+class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGestureRecognizerDelegate {
     
     struct TitlePlaceholder {
         static let Timeline = NSLocalizedString("朋友圈", comment: "Timeline")
@@ -99,6 +99,11 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate {
         
         view.setNeedsLayout()
         view.layoutIfNeeded()
+        
+        let pan = UIScreenEdgePanGestureRecognizer(target: self, action: "panGestureHandle:")
+        pan.edges = .Left
+        pan.delegate = self
+        view.addGestureRecognizer(pan)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -135,7 +140,7 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        _popSubSearchViewController()
+        _completePopSubSearchViewController()
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -146,6 +151,36 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate {
             self!._state = self!._fetchCurrentState(true)
             }, completion: nil)
     }
+    
+    // MARK: - Private Properties
+    private var _navigationBarTopConstraint: Constraint?
+    private var _contextTopMarginConstraint: Constraint?
+    private var _leadingMarginConstraint: Constraint?
+    private var _searchBarIcon: UIImage?
+    private lazy var _navigationBar = UINavigationBar(frame: CGRectMake(0, 20, 320, 44))
+    private lazy var _searchBar = UISearchBar(frame: CGRectMake(0, 20, 0, 44))
+    private lazy var _backButton = UIButton(type: .Custom)
+    private lazy var _cancelButton = UIButton(type: .Custom)
+    private lazy var _scrollView = UIScrollView()
+    private lazy var _scrollContentView = UIView()
+    private lazy var _stackView = UIStackView()
+    private lazy var _modalDelegate = SimulatePushTransition()
+    
+    private lazy var _blurBackgrounView: UIVisualEffectView = {
+        let blur = UIBlurEffect(style: .Light)
+        let view = UIVisualEffectView(effect: blur)
+        return view
+    }()
+    private var _state: GSState? {
+        didSet {
+            if _state == nil {
+                return
+            }
+            _transitionToState(_state!)
+        }
+    }
+    
+    private weak var _currentSubSearchViewController: SimpleSearchResultViewController?
     
     // MARK: - UISearchBarDelegate
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -166,34 +201,13 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate {
         return true
     }
     
-    // MARK: - Private Properties
-    private var _navigationBarTopConstraint: Constraint?
-    private var _contextTopMarginConstraint: Constraint?
-    private var _leadingMarginConstraint: Constraint?
-    private var _searchBarIcon: UIImage?
-    private lazy var _navigationBar = UINavigationBar(frame: CGRectMake(0, 20, 320, 44))
-    private lazy var _searchBar = UISearchBar(frame: CGRectMake(0, 20, 0, 44))
-    private lazy var _backButton = UIButton(type: .Custom)
-    private lazy var _cancelButton = UIButton(type: .Custom)
-    private lazy var _scrollView = UIScrollView()
-    private lazy var _scrollContentView = UIView()
-    private lazy var _stackView = UIStackView()
-    
-    private lazy var _blurBackgrounView: UIVisualEffectView = {
-        let blur = UIBlurEffect(style: .Light)
-        let view = UIVisualEffectView(effect: blur)
-        return view
-    }()
-    private var _state: GSState? {
-        didSet {
-            if _state == nil {
-                return
-            }
-            _transitionToState(_state!)
+    // MARK: - UIGestureRecognizerDelegate
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if _currentSubSearchViewController != nil {
+            return true
         }
+        return false
     }
-    
-    private weak var _currentSubSearchViewController: SimpleSearchResultViewController?
     
     // MARK: - Event Response
     func buttonTapped(sender: UIButton) {
@@ -202,9 +216,14 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate {
         switch tag {
         case .Timeline:
             print("timeline")
-            let timelineSearch = TimelineSearchResultViewController()
-            _searchBar.setImage(AppContext.globalSearchTimelineIcon(.Small), forSearchBarIcon: .Search, state: .Normal)
-            _pushToSubSearchViewController(timelineSearch, placeholder: TitlePlaceholder.SearchTimeline)
+//            let timelineSearch = TimelineSearchResultViewController()
+//            _searchBar.setImage(AppContext.globalSearchTimelineIcon(.Small), forSearchBarIcon: .Search, state: .Normal)
+//            _pushToSubSearchViewController(timelineSearch, placeholder: TitlePlaceholder.SearchTimeline)
+            let vc = ChatViewController()
+            let nc = SearchNavigationController(rootViewController: vc)
+            nc.modalPresentationStyle = .Custom
+            nc.transitioningDelegate = _modalDelegate
+            presentViewController(nc, animated: true, completion: nil)
         case .Article:
             print("article")
             let articleSearch = ArticleSearchResultViewController()
@@ -221,12 +240,31 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate {
     }
     
     func backButtonTapped(sender: UIButton) {
-        _popSubSearchViewController()
+        _completePopSubSearchViewController()
     }
     
     func cancelButtonTapped(sender: UIButton) {
         _searchBar.resignFirstResponder()
         active = false
+    }
+    
+    func panGestureHandle(pan: UIPanGestureRecognizer) {
+        var progress = pan.translationInView(view).x / view.bounds.size.width
+        progress = min(1.0, max(0.0, progress))
+        
+        if pan.state == UIGestureRecognizerState.Began {
+            print("Began")
+        } else if pan.state == UIGestureRecognizerState.Changed {
+            print("Changed")
+            _popSubSearchViewController(progress: progress)
+        } else if pan.state == UIGestureRecognizerState.Ended || pan.state == UIGestureRecognizerState.Cancelled {
+            if progress >= 0.5 {
+                _completePopSubSearchViewController()
+            } else {
+                _cancelPopSubSearchViewController()
+            }
+            print("Ended || Cancelled")
+        }
     }
     
     // MARK: - Private Methods
@@ -390,27 +428,47 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate {
         })
     }
     
-    private func _popSubSearchViewController() {
+    private func _popSubSearchViewController(progress progress: CGFloat?) {
         
         if _currentSubSearchViewController == nil {
             return
         }
         
+        let view = _currentSubSearchViewController!.view
+        let leading = view.width * (progress! - 1)
+        let navigationLeadingOffset = -36 * progress!
+        _leadingMarginConstraint!.updateOffset(navigationLeadingOffset)
+        view.snp_updateConstraints { (make) -> Void in
+            make.leading.equalTo(self.view.snp_trailing).offset(leading)
+        }
+    }
+    
+    private func _completePopSubSearchViewController() {
         _searchBar.setImage(_searchBarIcon, forSearchBarIcon: .Search, state: .Normal)
         _searchBar.placeholder = TitlePlaceholder.SearchTitle
         _leadingMarginConstraint!.updateOffset(-36)
         
-        let view = _currentSubSearchViewController!.view
-        view.snp_updateConstraints { (make) -> Void in
+        _currentSubSearchViewController!.view.snp_updateConstraints { (make) -> Void in
             make.leading.equalTo(self.view.snp_trailing)
         }
         UIView.animateWithDuration(0.25, animations: { () -> Void in
             self.view.layoutIfNeeded()
             }) { (finished) -> Void in
-                view.removeFromSuperview()
+                self._currentSubSearchViewController!.view.removeFromSuperview()
                 self._currentSubSearchViewController!.removeFromParentViewController()
                 self._currentSubSearchViewController = nil
         }
+    }
+    
+    private func _cancelPopSubSearchViewController() {
+        
+        _leadingMarginConstraint!.updateOffset(0)
+        _currentSubSearchViewController!.view.snp_updateConstraints { (make) -> Void in
+            make.leading.equalTo(self.view.snp_trailing).offset(-self.view.width)
+        }
+        UIView.animateWithDuration(0.25, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            })
     }
 
 }

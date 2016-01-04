@@ -27,6 +27,10 @@ extension UIApplication {
         }
         return window!!.frame.width
     }
+    
+    public static func window() -> UIWindow {
+        return UIApplication.sharedApplication().delegate!.window!!
+    }
 }
 
 extension UIView {

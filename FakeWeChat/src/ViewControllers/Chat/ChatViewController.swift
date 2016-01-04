@@ -24,6 +24,12 @@ class ChatViewController: UIViewController, MessageListViewDelegate {
         
         _cancelItem.target = self
         _cancelItem.action = "_cancelItemTapped:"
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "back", style: .Plain, target: self, action: "back")
+    }
+    
+    func back() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

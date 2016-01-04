@@ -74,7 +74,6 @@ extension String {
 extension UIImage {
     func backgrounded(color: UIColor, style: AppContext.IconStyle = .Round) -> UIImage {
         
-        let bg = UIImage(color: color, size: self.size).imageByRoundCornerRadius(self.size.width.radius(style))
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         let context = UIGraphicsGetCurrentContext()
         let rect = CGRectMake(0, 0, self.size.width, self.size.height)
@@ -83,11 +82,9 @@ extension UIImage {
         
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: .AllCorners, cornerRadii: CGSizeMake(self.size.width.radius(style), self.size.height.radius(style)))
         path.closePath()
-        CGContextSaveGState(context);
-        path.addClip()
-        CGContextDrawImage(context, rect, bg.CGImage)
+        color.setFill()
+        path.fill()
         CGContextDrawImage(context, rect, self.CGImage)
-        CGContextRestoreGState(context);
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
