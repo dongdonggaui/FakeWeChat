@@ -25,11 +25,11 @@ class ChatViewController: UIViewController, MessageListViewDelegate {
         _cancelItem.target = self
         _cancelItem.action = "_cancelItemTapped:"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "back", style: .Plain, target: self, action: "back")
-    }
-    
-    func back() {
-        dismissViewControllerAnimated(true, completion: nil)
+        let rightItem = UIBarButtonItem()
+        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        rightItem.setTitleTextAttributes(attributes, forState: .Normal)
+        rightItem.title = String.fontAwesomeIconWithName(.User)
+        navigationItem.rightBarButtonItem = rightItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +48,10 @@ class ChatViewController: UIViewController, MessageListViewDelegate {
     }
     
     // MARK: - Event Response
+    func dismiss() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func _cancelItemTapped(sender: UIBarButtonItem) {
         
         _switchToEditMode(false)

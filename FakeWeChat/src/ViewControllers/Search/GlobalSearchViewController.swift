@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import FontAwesome
 
 struct GSNavigationInfo {
     
@@ -201,6 +202,10 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
         return true
     }
     
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchBar.text = searchText
+    }
+    
     // MARK: - UIGestureRecognizerDelegate
     func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if _currentSubSearchViewController != nil {
@@ -220,9 +225,11 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
 //            _searchBar.setImage(AppContext.globalSearchTimelineIcon(.Small), forSearchBarIcon: .Search, state: .Normal)
 //            _pushToSubSearchViewController(timelineSearch, placeholder: TitlePlaceholder.SearchTimeline)
             let vc = ChatViewController()
-            let nc = SearchNavigationController(rootViewController: vc)
+            let rootVc = SearchNavigationRootViewController(rootViewController: vc)
+            let nc = SearchNavigationController(rootViewController: rootVc)
             nc.modalPresentationStyle = .Custom
             nc.transitioningDelegate = _modalDelegate
+            _searchBar.resignFirstResponder()
             presentViewController(nc, animated: true, completion: nil)
         case .Article:
             print("article")
@@ -244,6 +251,7 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
     }
     
     func cancelButtonTapped(sender: UIButton) {
+        _searchBar.text = nil
         _searchBar.resignFirstResponder()
         active = false
     }
@@ -270,7 +278,8 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
     // MARK: - Private Methods
     private func _setupContentView() {
         
-        view.addSubview(_blurBackgrounView)
+//        view.addSubview(_blurBackgrounView)
+        view.insertSubview(_blurBackgrounView, atIndex: 0)
         _blurBackgrounView.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(view)
         }
@@ -279,7 +288,8 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
         _scrollView.alwaysBounceVertical = true
         _scrollView.keyboardDismissMode = .OnDrag
         
-        view.addSubview(_scrollView)
+//        view.addSubview(_scrollView)
+        view.insertSubview(_scrollView, atIndex: 1)
         _scrollContentView.snp_makeConstraints { (make) -> Void in
             make.width.equalTo(view)
             make.edges.equalTo(_scrollView)
@@ -423,7 +433,7 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
         subSearch.view.snp_updateConstraints(closure: { (make) -> Void in
             make.leading.equalTo(view.snp_trailing).offset(-UIApplication.tq_windowWidth())
         })
-        UIView.animateWithDuration(0.25, animations: { () -> Void in
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
     }
@@ -448,10 +458,14 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
         _searchBar.placeholder = TitlePlaceholder.SearchTitle
         _leadingMarginConstraint!.updateOffset(-36)
         
+        if _currentSubSearchViewController == nil {
+            return
+        }
+        
         _currentSubSearchViewController!.view.snp_updateConstraints { (make) -> Void in
             make.leading.equalTo(self.view.snp_trailing)
         }
-        UIView.animateWithDuration(0.25, animations: { () -> Void in
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.view.layoutIfNeeded()
             }) { (finished) -> Void in
                 self._currentSubSearchViewController!.view.removeFromSuperview()
@@ -463,10 +477,15 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
     private func _cancelPopSubSearchViewController() {
         
         _leadingMarginConstraint!.updateOffset(0)
+        
+        if _currentSubSearchViewController == nil {
+            return
+        }
+        
         _currentSubSearchViewController!.view.snp_updateConstraints { (make) -> Void in
             make.leading.equalTo(self.view.snp_trailing).offset(-self.view.width)
         }
-        UIView.animateWithDuration(0.25, animations: { () -> Void in
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.view.layoutIfNeeded()
             })
     }

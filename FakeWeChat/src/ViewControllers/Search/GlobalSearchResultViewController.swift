@@ -22,8 +22,15 @@ class GlobalSearchResultViewController: UIViewController, UISearchResultsUpdatin
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.addSubview(_tableView)
+        _tableView.backgroundColor = UIColor.clearColor()
+        _tableView.snp_makeConstraints { (make) -> Void in
+            make.edges.equalTo(view)
+        }
         _tableView.dataSource = self
         _tableView.delegate = self
+        _tableView.estimatedRowHeight = 80
+        _tableView.registerClass(GlobalSearchResultTableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,6 +57,10 @@ class GlobalSearchResultViewController: UIViewController, UISearchResultsUpdatin
         return cell
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
     }
@@ -60,7 +71,7 @@ class GlobalSearchResultViewController: UIViewController, UISearchResultsUpdatin
 
     // MARK: - UISearchResultsUpdating
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-//        <#code#>
+        _tableView.reloadData()
     }
 
 }

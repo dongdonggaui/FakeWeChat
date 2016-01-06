@@ -32,7 +32,7 @@ class SimulatePushTransition: NSObject, UIViewControllerTransitioningDelegate, U
     
     // MARK: - UIViewControllerAnimatedTransitioning
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-        return 0.25
+        return 0.2
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {

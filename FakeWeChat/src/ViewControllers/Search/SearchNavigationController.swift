@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchNavigationController: UINavigationController, UIGestureRecognizerDelegate {
+class SearchNavigationController: UINavigationController, UIGestureRecognizerDelegate, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +17,9 @@ class SearchNavigationController: UINavigationController, UIGestureRecognizerDel
         pan.edges = .Left
         pan.delegate = self
         view.addGestureRecognizer(pan)
+        
+        delegate = self
+        interactivePopGestureRecognizer?.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,9 +27,19 @@ class SearchNavigationController: UINavigationController, UIGestureRecognizerDel
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - UINavigationControllerDelegate
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        if viewController.isKindOfClass(SearchNavigationRootViewController.self) {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
     // MARK: - UIGestureRecognizerDelegate
     func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return viewControllers.count == 1
+        if gestureRecognizer == interactivePopGestureRecognizer {
+            return viewControllers.count > 2
+        }
+        return viewControllers.count == 2
     }
     
     // MARK: - Event Response
@@ -42,7 +55,7 @@ class SearchNavigationController: UINavigationController, UIGestureRecognizerDel
             self.simulatePushTransition.interactiveTransition?.updateInteractiveTransition(progress)
             print("Changed")
         } else if pan.state == UIGestureRecognizerState.Ended || pan.state == UIGestureRecognizerState.Cancelled {
-            if progress > 0.3 {
+            if progress >= 0.5 {
                 self.simulatePushTransition.interactiveTransition?.finishInteractiveTransition()
             } else {
                 self.simulatePushTransition.interactiveTransition?.cancelInteractiveTransition()
@@ -56,4 +69,32 @@ class SearchNavigationController: UINavigationController, UIGestureRecognizerDel
     lazy var simulatePushTransition: SimulatePushTransition = {
         return self.transitioningDelegate as! SimulatePushTransition
     }()
+}
+
+class SearchNavigationRootViewController: UIViewController {
+    
+    // MARK: - Life Cycle
+    init(rootViewController: UIViewController?) {
+        super.init(nibName: nil, bundle: nil)
+        _rootViewController = rootViewController
+    }
+    
+    override convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        self.init(rootViewController: nil)
+    }
+
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init(rootViewController: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if _rootViewController != nil {
+            navigationController?.pushViewController(_rootViewController!, animated: false)
+        }
+    }
+    
+    // MARK: - Properties
+    private var _rootViewController: UIViewController?
 }

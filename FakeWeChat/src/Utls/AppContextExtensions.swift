@@ -17,9 +17,9 @@ extension CGSize {
         case .Small:
             return CGSizeMake(17.5, 17.5)
         case .Middle:
-            return CGSizeMake(22, 22)
+            return CGSizeMake(22, 22)       // navigation
         case .Big:
-            return CGSizeMake(25, 25)
+            return CGSizeMake(25, 25)       // tab
         case .Biggest:
             return CGSizeMake(60, 60)
         }
@@ -85,6 +85,27 @@ extension UIImage {
         color.setFill()
         path.fill()
         CGContextDrawImage(context, rect, self.CGImage)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
+    
+    func squared(color: UIColor = UIColor.clearColor(), style: AppContext.IconStyle = .Square) -> UIImage {
+        let dimension = max(self.size.width, self.size.height)
+        let size = CGSizeMake(dimension, dimension)
+        UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
+        let context = UIGraphicsGetCurrentContext()
+        let rect = CGRectMake(0, 0, dimension, dimension)
+        let drawRect = CGRectMake(CGFloatPixelRound((self.size.width - dimension) * 0.5), CGFloatPixelRound((self.size.height - dimension) * 0.5), self.size.width, self.size.height)
+        CGContextScaleCTM(context, 1, -1)
+        CGContextTranslateCTM(context, 0, -rect.size.height)
+        
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: .AllCorners, cornerRadii: CGSizeMake(self.size.width.radius(style), self.size.height.radius(style)))
+        path.closePath()
+        color.setFill()
+        path.fill()
+        CGContextDrawImage(context, drawRect, self.CGImage)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
