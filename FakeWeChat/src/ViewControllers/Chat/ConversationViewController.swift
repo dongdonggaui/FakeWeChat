@@ -8,16 +8,39 @@
 
 import UIKit
 
-class ConversationViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class ConversationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var _tableView: UITableView!
+    
+    // MARK: - Life Cycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        title = NSLocalizedString("聊天", comment: "Chat Title")
+        tabBarItem.image = UIImage.fontAwesomeIconWithName(.Wechat, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = "聊天";
-        self.tableView.tableFooterView = UIView()
-        self.tableView.estimatedRowHeight = 67
+        
+        navigationController?.view.backgroundColor = UIColor.whiteColor()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addButtonTapped:")
+        
+        _searchBar.height = 44
+        _searchBar.searchBarStyle = .Minimal
+        _searchBar.delegate = self
+        _searchBar.placeholder = NSLocalizedString("搜索", comment: "Search Placeholder")
+        _tableView.tableFooterView = UIView()
+        _tableView.estimatedRowHeight = 67
+        _tableView.tableHeaderView = _searchBar
+        _tableView.contentOffset = CGPointMake(0, 44)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let selectedIndexPath = _tableView.indexPathForSelectedRow {
+            _tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +55,7 @@ class ConversationViewController: BaseViewController, UITableViewDataSource, UIT
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 15
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -63,7 +86,33 @@ class ConversationViewController: BaseViewController, UITableViewDataSource, UIT
             } else {
                 paths = [path1, path2]
             }
-            avatarView.setImagePaths(paths, completion: nil)
+            avatarView.setImagePaths(paths, placeholder: nil, completion: nil)
         }
     }
+    
+    // MARK: - UISearchBarDelegate
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        presentViewController(_searchController, animated: true, completion: nil)
+        return false
+    }
+    
+    // MARK: - Event Response
+    func addButtonTapped(sender: UIBarButtonItem) {
+        _viewLoader.showPopupMenu(inRect: CGRectMake(view.width - 44.5, 64, 40, 2))
+    }
+    
+    // MARK: - Private Properties
+    private lazy var _popupMenuItems: [KxMenuItem] = []
+    private lazy var _searchBar = UISearchBar()
+    private lazy var _searchResultViewController = GlobalSearchResultViewController()
+    private lazy var _searchController: GlobalSearchViewController = {
+        let sc = GlobalSearchViewController(searchResultsController: self._searchResultViewController)
+        sc.searchResultsUpdater = self._searchResultViewController
+        return sc
+    }()
+    private lazy var _viewLoader: ConversationViewLoader = {
+        let vl = ConversationViewLoader(withViewController: self)
+        return vl
+    }()
+    
 }

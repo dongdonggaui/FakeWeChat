@@ -4,27 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Alamofire.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Kingfisher.xcscheme</key>
+		<key>KVOController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-FakeWeChat.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SnapKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,32 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0FF85B57BD50B634EFAAC2B819492CF1</key>
+		<key>03155536B3F92AD944B1155ED189FF9C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>11017DFA1A2440A506520F030C1382DD</key>
+		<key>4BF8D3ADD318C68B2D9AC79492EE62E1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>432ECC54282C84882B482CCB4CF227FC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D2F8FC6DB56E318527FD47D6E2985FD9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D506C6582B2283981A51B31422B04C43</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F91226101ECE8FCFD221A3EC54481F82</key>
+		<key>5A77F621FB75E93FCEC4CA23A04BF2AB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,24 +1,15 @@
 PODS:
-  - Alamofire (3.1.4)
-  - Kingfisher (1.8.5)
-  - SnapKit (0.18.0)
-  - SwiftyJSON (2.3.2)
+  - KVOController (1.0.3)
   - YYKit (0.9.7):
     - YYKit/no-arc (= 0.9.7)
   - YYKit/no-arc (0.9.7)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.1.4)
-  - Kingfisher (~> 1.8.5)
-  - SnapKit (~> 0.18.0)
-  - SwiftyJSON (~> 2.3.2)
-  - YYKit (~> 0.9.7)
+  - KVOController
+  - YYKit
 
 SPEC CHECKSUMS:
-  Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
-  Kingfisher: 780fed0fa82692a3bd59d53329ae2b85cdd354a5
-  SnapKit: e1f090a6d47b1dd4bd89b73f72b6746a7835ef3c
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
   YYKit: b6b9319f5e6b01784b6a4225cec4c3dcf8f6d249
 
 COCOAPODS: 0.39.0

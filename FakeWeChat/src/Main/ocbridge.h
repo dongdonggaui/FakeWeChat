@@ -9,7 +9,11 @@
 #ifndef ocbridge_h
 #define ocbridge_h
 
+#import <FBKVOController.h>
+#import <YYKit.h>
+
 #import "WBEmoticonInputView.h"
 #import "WBStatusComposeTextParser.h"
+#import "KxMenu.h"
 
 #endif /* ocbridge_h */

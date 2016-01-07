@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '42EE69B09F9E446D1E3A0BDE'
+               BlueprintIdentifier = '1E41150F771D0759BBB4E3C5'
                BlueprintName = 'Pods-FakeWeChat'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_FakeWeChat.framework'>

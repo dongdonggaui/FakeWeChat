@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="93" id="KGk-i7-Jjw" customClass="SimpleSettingTableViewCellTableViewCell" customModule="FakeWeChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="287" height="92"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hpl-zo-31q">
+                        <rect key="frame" x="8" y="33" width="27" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="27" id="EiG-zc-ncs"/>
+                            <constraint firstAttribute="width" secondItem="Hpl-zo-31q" secondAttribute="height" id="F3e-ph-WRT"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCk-aJ-2I8">
+                        <rect key="frame" x="257" y="32" width="30" height="30"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="zCk-aJ-2I8" secondAttribute="height" multiplier="1:1" id="Z30-yq-sfB"/>
+                            <constraint firstAttribute="width" constant="30" id="yDD-Mo-wPn"/>
+                        </constraints>
+                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b9n-1U-xT4">
+                        <rect key="frame" x="43" y="24" width="42" height="46"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94N-Y8-306">
+                                <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzs-ql-kYO">
+                                <rect key="frame" x="0.0" y="29" width="42" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="zCk-aJ-2I8" firstAttribute="centerY" secondItem="Hpl-zo-31q" secondAttribute="centerY" id="6PL-BT-cKS"/>
+                    <constraint firstItem="Hpl-zo-31q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="IOd-aI-GxB"/>
+                    <constraint firstItem="b9n-1U-xT4" firstAttribute="centerY" secondItem="Hpl-zo-31q" secondAttribute="centerY" id="VEq-1I-poj"/>
+                    <constraint firstItem="b9n-1U-xT4" firstAttribute="leading" secondItem="Hpl-zo-31q" secondAttribute="trailing" constant="8" id="Wqu-PH-GGT"/>
+                    <constraint firstAttribute="trailing" secondItem="zCk-aJ-2I8" secondAttribute="trailing" id="ehL-gQ-CRV"/>
+                    <constraint firstItem="Hpl-zo-31q" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zNK-Nm-yIk"/>
+                    <constraint firstItem="zCk-aJ-2I8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b9n-1U-xT4" secondAttribute="trailing" constant="8" id="zTk-t5-sTT"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="extensionView" destination="zCk-aJ-2I8" id="yy9-bS-yDk"/>
+                <outlet property="iconHeightConstraint" destination="EiG-zc-ncs" id="yyd-Yx-ybg"/>
+                <outlet property="iconImageView" destination="Hpl-zo-31q" id="ddF-NY-GRg"/>
+                <outlet property="stackView" destination="b9n-1U-xT4" id="6bK-4m-fXT"/>
+                <outlet property="subtitleLabel" destination="pzs-ql-kYO" id="JUN-z0-fch"/>
+                <outlet property="titleLabel" destination="94N-Y8-306" id="UhT-Ul-TK0"/>
+            </connections>
+            <point key="canvasLocation" x="565" y="519.5"/>
+        </tableViewCell>
+    </objects>
+</document>
