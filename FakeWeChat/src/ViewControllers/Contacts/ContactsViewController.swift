@@ -15,6 +15,8 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         super.awakeFromNib()
         
         title = NSLocalizedString("通讯录", comment: "Contacts")
+        tabBarItem.image = UIImage.fontAwesomeIconWithName(.Users, textColor: UIColor.flatBlueColor(), size: CGSizeMake(30, 30))
+        
         let rightButton = UIButton(type: .Custom)
         let addIcon = UIImage.fontAwesomeIconWithName(.UserPlus, textColor: UIColor.whiteColor(), size: CGSizeMake(30, 30))
         rightButton.setImage(addIcon, forState: .Normal)
@@ -63,7 +65,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func configureCell(cell: ContactTableViewCell, atIndexPath indexPath: NSIndexPath) {
         cell.nameLabel.text = "某某某"
-        let avatar = UIImage.fontAwesomeIconWithName(.User, textColor: UIColor.whiteColor(), size: CGSizeMake(36, 36)).squared(UIColor.lightGrayColor(), style: .Square)
+        let avatar = AppContext.avatarPlaceholder()
         cell.avatarImageView.image = avatar
     }
     

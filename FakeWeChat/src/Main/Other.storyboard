@@ -24,7 +24,7 @@
         <!--More View Controller-->
         <scene sceneID="vSY-fb-3Ap">
             <objects>
-                <viewController storyboardIdentifier="MoreViewController" id="WRs-6y-i05" customClass="MoreViewController" customModule="FakeWeChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoreViewController" automaticallyAdjustsScrollViewInsets="NO" id="WRs-6y-i05" customClass="MoreViewController" customModule="FakeWeChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kZx-In-WDO"/>
                         <viewControllerLayoutGuide type="bottom" id="Nqm-Eb-eE4"/>
@@ -32,9 +32,28 @@
                     <view key="view" contentMode="scaleToFill" id="e4n-Qz-5uq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="hl8-oV-D1Y">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="WRs-6y-i05" id="g86-c3-pla"/>
+                                    <outlet property="delegate" destination="WRs-6y-i05" id="XGq-QL-0J4"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hl8-oV-D1Y" firstAttribute="leading" secondItem="e4n-Qz-5uq" secondAttribute="leading" id="JMg-nr-o43"/>
+                            <constraint firstItem="Nqm-Eb-eE4" firstAttribute="top" secondItem="hl8-oV-D1Y" secondAttribute="bottom" id="PXf-Ie-XaH"/>
+                            <constraint firstItem="hl8-oV-D1Y" firstAttribute="top" secondItem="kZx-In-WDO" secondAttribute="bottom" id="c7x-OZ-CSO"/>
+                            <constraint firstAttribute="trailing" secondItem="hl8-oV-D1Y" secondAttribute="trailing" id="dTo-Wz-7Cc"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="h6q-ZR-5YM"/>
+                    <connections>
+                        <outlet property="tableView" destination="hl8-oV-D1Y" id="LBs-5I-NRq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zf9-TQ-UUt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

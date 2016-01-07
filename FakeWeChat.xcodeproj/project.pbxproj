@@ -17,6 +17,8 @@
 		06BF9A8E1C302737005B7B72 /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF9A8D1C302737005B7B72 /* MessageListView.swift */; };
 		093EB52F1C3CA9AF0077E26D /* FontAwesome.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 093EB52E1C3CA9AF0077E26D /* FontAwesome.framework.dSYM */; };
 		093EB5311C3CEE610077E26D /* GlobalSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093EB5301C3CEE610077E26D /* GlobalSearchResultView.swift */; };
+		095BED2A1C3E0BBF00EBF174 /* SimpleSettingTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BED281C3E0BBF00EBF174 /* SimpleSettingTableViewCellTableViewCell.swift */; };
+		095BED2B1C3E0BBF00EBF174 /* SimpleSettingTableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 095BED291C3E0BBF00EBF174 /* SimpleSettingTableViewCellTableViewCell.xib */; };
 		095C06E81C2D08D7004D00C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095C06E61C2D08D7004D00C7 /* Main.storyboard */; };
 		095C06EA1C2D08D7004D00C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 095C06E91C2D08D7004D00C7 /* Assets.xcassets */; };
 		095C06ED1C2D08D7004D00C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095C06EB1C2D08D7004D00C7 /* LaunchScreen.storyboard */; };
@@ -119,6 +121,8 @@
 		06BF9A8D1C302737005B7B72 /* MessageListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListView.swift; sourceTree = "<group>"; };
 		093EB52E1C3CA9AF0077E26D /* FontAwesome.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = FontAwesome.framework.dSYM; path = Carthage/Build/iOS/FontAwesome.framework.dSYM; sourceTree = "<group>"; };
 		093EB5301C3CEE610077E26D /* GlobalSearchResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSearchResultView.swift; sourceTree = "<group>"; };
+		095BED281C3E0BBF00EBF174 /* SimpleSettingTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSettingTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
+		095BED291C3E0BBF00EBF174 /* SimpleSettingTableViewCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleSettingTableViewCellTableViewCell.xib; sourceTree = "<group>"; };
 		095C06DF1C2D08D7004D00C7 /* FakeWeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FakeWeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		095C06E71C2D08D7004D00C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		095C06E91C2D08D7004D00C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Assets.xcassets; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 				064060101C2EDAE10035F510 /* MultiSelectTableViewCell.swift */,
 				064060121C2EE59F0035F510 /* TextMessageTableViewCell.swift */,
 				09737ADD1C32762A00817C8D /* SearchResultTableViewCell.swift */,
+				095BED281C3E0BBF00EBF174 /* SimpleSettingTableViewCellTableViewCell.swift */,
+				095BED291C3E0BBF00EBF174 /* SimpleSettingTableViewCellTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -586,6 +592,7 @@
 			files = (
 				095C06ED1C2D08D7004D00C7 /* LaunchScreen.storyboard in Resources */,
 				095C071B1C2D0B94004D00C7 /* Timeline.storyboard in Resources */,
+				095BED2B1C3E0BBF00EBF174 /* SimpleSettingTableViewCellTableViewCell.xib in Resources */,
 				095C06EA1C2D08D7004D00C7 /* Assets.xcassets in Resources */,
 				095C07191C2D0B8D004D00C7 /* Contacts.storyboard in Resources */,
 				095C071D1C2D0B9B004D00C7 /* Other.storyboard in Resources */,
@@ -693,6 +700,7 @@
 				0640600E1C2EB3260035F510 /* MessageNodeView.swift in Sources */,
 				095C07281C2D16EA004D00C7 /* BadgeView.swift in Sources */,
 				09737ADC1C32705F00817C8D /* SimpleCellView.swift in Sources */,
+				095BED2A1C3E0BBF00EBF174 /* SimpleSettingTableViewCellTableViewCell.swift in Sources */,
 				061937401C2D8CA400639A40 /* TQHelper.swift in Sources */,
 				064060081C2E69EE0035F510 /* TextMessageNodeView.swift in Sources */,
 				09787AA81C3D0F2900381928 /* TimelineSearchResultViewController.swift in Sources */,

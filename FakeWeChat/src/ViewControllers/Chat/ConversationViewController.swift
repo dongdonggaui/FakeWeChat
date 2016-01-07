@@ -15,7 +15,8 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        title = "聊天";
+        title = NSLocalizedString("聊天", comment: "Chat Title")
+        tabBarItem.image = UIImage.fontAwesomeIconWithName(.Wechat, textColor: UIColor.flatBlueColor(), size: CGSizeMake(30, 30))
     }
     
     override func viewDidLoad() {
@@ -31,7 +32,7 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
         _tableView.tableFooterView = UIView()
         _tableView.estimatedRowHeight = 67
         _tableView.tableHeaderView = _searchBar
-//        _tableView.contentOffset = CGPointMake(0, 44)
+        _tableView.contentOffset = CGPointMake(0, 44)
     }
     
     override func viewWillAppear(animated: Bool) {

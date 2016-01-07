@@ -40,6 +40,17 @@ class AppContext : NSObject {
     // MARK: - Global Resource
     static let globalImageCache = KingfisherManager.sharedManager.cache
     
+    // MARK: - Placeholder
+    static func avatarPlaceholder() -> UIImage {
+        var avatar = imageWithCacheKey("avatarPlaceholder")
+        if avatar == nil {
+            avatar = UIImage.fontAwesomeIconWithName(.User, textColor: UIColor.whiteColor(), size: CGSizeMake(36, 36)).squared(UIColor.lightGrayColor(), style: .Square)
+            let imageData = UIImageJPEGRepresentation(avatar!, 0.9)
+            globalImageCache.storeImage(avatar!, originalData: imageData, forKey: "avatarPlaceholder")
+        }
+        return avatar!
+    }
+    
     // MARK: - Conversation
     
     // MARK: - Search Resource
