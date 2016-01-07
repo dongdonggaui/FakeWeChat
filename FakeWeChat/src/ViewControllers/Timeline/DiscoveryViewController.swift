@@ -19,7 +19,7 @@ class DiscoveryViewController: UIViewController, UITableViewDataSource, UITableV
     override func awakeFromNib() {
         super.awakeFromNib()
         title = NSLocalizedString("发现", comment: "Discovery Title")
-        tabBarItem.image = UIImage.fontAwesomeIconWithName(.Safari, textColor: UIColor.flatBlueColor(), size: CGSizeMake(30, 30))
+        tabBarItem.image = UIImage.fontAwesomeIconWithName(.Safari, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
     }
 
     override func viewDidLoad() {

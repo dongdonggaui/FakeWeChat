@@ -27,7 +27,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.awakeFromNib()
         
         title = NSLocalizedString("更多", comment: "More")
-        tabBarItem.image = UIImage.fontAwesomeIconWithName(.Gear, textColor: UIColor.flatBlueColor(), size: CGSizeMake(30, 30))
+        tabBarItem.image = UIImage.fontAwesomeIconWithName(.Gear, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
     }
 
     override func viewDidLoad() {

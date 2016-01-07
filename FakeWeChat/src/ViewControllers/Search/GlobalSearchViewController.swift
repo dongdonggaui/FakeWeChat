@@ -204,6 +204,10 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchBar.text = searchText
+        
+        if let text = searchBar.text as NSString! {
+            _scrollView.hidden = text.length > 0
+        }
     }
     
     // MARK: - UIGestureRecognizerDelegate
@@ -278,7 +282,6 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
     // MARK: - Private Methods
     private func _setupContentView() {
         
-//        view.addSubview(_blurBackgrounView)
         view.insertSubview(_blurBackgrounView, atIndex: 0)
         _blurBackgrounView.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(view)
@@ -288,8 +291,7 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
         _scrollView.alwaysBounceVertical = true
         _scrollView.keyboardDismissMode = .OnDrag
         
-//        view.addSubview(_scrollView)
-        view.insertSubview(_scrollView, atIndex: 1)
+        view.addSubview(_scrollView)
         _scrollContentView.snp_makeConstraints { (make) -> Void in
             make.width.equalTo(view)
             make.edges.equalTo(_scrollView)

@@ -15,7 +15,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         super.awakeFromNib()
         
         title = NSLocalizedString("通讯录", comment: "Contacts")
-        tabBarItem.image = UIImage.fontAwesomeIconWithName(.Users, textColor: UIColor.flatBlueColor(), size: CGSizeMake(30, 30))
+        tabBarItem.image = UIImage.fontAwesomeIconWithName(.Users, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
         
         let rightButton = UIButton(type: .Custom)
         let addIcon = UIImage.fontAwesomeIconWithName(.UserPlus, textColor: UIColor.whiteColor(), size: CGSizeMake(30, 30))

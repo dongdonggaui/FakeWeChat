@@ -16,7 +16,7 @@ class ConversationViewController: UIViewController, UITableViewDataSource, UITab
     override func awakeFromNib() {
         super.awakeFromNib()
         title = NSLocalizedString("聊天", comment: "Chat Title")
-        tabBarItem.image = UIImage.fontAwesomeIconWithName(.Wechat, textColor: UIColor.flatBlueColor(), size: CGSizeMake(30, 30))
+        tabBarItem.image = UIImage.fontAwesomeIconWithName(.Wechat, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
     }
     
     override func viewDidLoad() {

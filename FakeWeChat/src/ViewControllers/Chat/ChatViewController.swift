@@ -25,11 +25,7 @@ class ChatViewController: UIViewController, MessageListViewDelegate {
         _cancelItem.target = self
         _cancelItem.action = "_cancelItemTapped:"
         
-        let rightItem = UIBarButtonItem()
-        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
-        rightItem.setTitleTextAttributes(attributes, forState: .Normal)
-        rightItem.title = String.fontAwesomeIconWithName(.User)
-        navigationItem.rightBarButtonItem = rightItem
+        navigationItem.rightBarButtonItem = _rightItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +36,13 @@ class ChatViewController: UIViewController, MessageListViewDelegate {
     // MARK: - Private Properties
     private lazy var _messageListView: MessageListView =  MessageListView()
     private lazy var _cancelItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: nil, action: nil)
+    private lazy var _rightItem: UIBarButtonItem = {
+        let rightItem = UIBarButtonItem()
+        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        rightItem.setTitleTextAttributes(attributes, forState: .Normal)
+        rightItem.title = String.fontAwesomeIconWithName(.User)
+        return rightItem
+    }()
     
     // MARK: - MessageListViewDelegate
     func messageListView(messageListView: MessageListView, didTappedMoreMenuItemInCell cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
@@ -63,8 +66,10 @@ class ChatViewController: UIViewController, MessageListViewDelegate {
         _messageListView.editing = edit
         if edit {
             navigationItem.leftBarButtonItem = _cancelItem
+            navigationItem.rightBarButtonItem = nil
         } else {
             navigationItem.leftBarButtonItem = nil
+            navigationItem.rightBarButtonItem = _rightItem
         }
     }
 
