@@ -10,69 +10,69 @@ import UIKit
 import SnapKit
 import FontAwesome
 
-struct GSNavigationInfo {
-    
-    static func height(state: GSState) -> CGFloat {
-        var height = 0
-        if state == .InactiveRegular || state == .ActiveRegular {
-            height = 64
-        } else {
-            height = 32
-        }
-        return CGFloat(height)
-    }
-    
-    static func topMargin(state: GSState) -> CGFloat {
-        var topMargin = 0
-        switch state {
-        case .InactiveRegular:
-            topMargin = 44
-        case .InactiveCompact:
-            topMargin = 32
-        default:
-            topMargin = 0
-        }
-        return CGFloat(topMargin)
-    }
-}
-
-struct GSVLayoutInfo {
-    
-    static let ContentHeight = CGFloat(80)
-    static let ContentFontSize = CGFloat(12)
-    static let ContentPadding = CGFloat(5)
-    
-    static func topMargin(state: GSState) -> CGFloat {
-        var topMargin = 0
-        switch state {
-        case .InactiveRegular:
-            topMargin = 144
-        case .InactiveCompact:
-            topMargin = 112
-        case .ActiveRegular:
-            topMargin = 100
-        case .ActiveCompact:
-            topMargin = 68
-        }
-        return CGFloat(topMargin)
-    }
-}
-
-enum GSButtonTag : Int {
-    case Unknown = 0
-    case Timeline = 1
-    case Article = 2
-    case Celebrity = 3
-}
-
-enum GSState : Int {
-    case InactiveRegular
-    case InactiveCompact
-    case ActiveRegular
-    case ActiveCompact
-}
-
 class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGestureRecognizerDelegate {
+    
+    struct NavigationInfo {
+        
+        static func height(state: State) -> CGFloat {
+            var height = 0
+            if state == .InactiveRegular || state == .ActiveRegular {
+                height = 64
+            } else {
+                height = 32
+            }
+            return CGFloat(height)
+        }
+        
+        static func topMargin(state: State) -> CGFloat {
+            var topMargin = 0
+            switch state {
+            case .InactiveRegular:
+                topMargin = 44
+            case .InactiveCompact:
+                topMargin = 32
+            default:
+                topMargin = 0
+            }
+            return CGFloat(topMargin)
+        }
+    }
+    
+    struct LayoutInfo {
+        
+        static let ContentHeight = CGFloat(80)
+        static let ContentFontSize = CGFloat(12)
+        static let ContentPadding = CGFloat(5)
+        
+        static func topMargin(state: State) -> CGFloat {
+            var topMargin = 0
+            switch state {
+            case .InactiveRegular:
+                topMargin = 144
+            case .InactiveCompact:
+                topMargin = 112
+            case .ActiveRegular:
+                topMargin = 100
+            case .ActiveCompact:
+                topMargin = 68
+            }
+            return CGFloat(topMargin)
+        }
+    }
+    
+    enum ButtonTag : Int {
+        case Unknown = 0
+        case Timeline = 1
+        case Article = 2
+        case Celebrity = 3
+    }
+    
+    enum State : Int {
+        case InactiveRegular
+        case InactiveCompact
+        case ActiveRegular
+        case ActiveCompact
+    }
     
     struct TitlePlaceholder {
         static let Timeline = NSLocalizedString("朋友圈", comment: "Timeline")
@@ -172,7 +172,7 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
         let view = UIVisualEffectView(effect: blur)
         return view
     }()
-    private var _state: GSState? {
+    private var _state: State? {
         didSet {
             if _state == nil {
                 return
@@ -221,7 +221,7 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
     // MARK: - Event Response
     func buttonTapped(sender: UIButton) {
         
-        let tag = GSButtonTag(rawValue: sender.tag) ?? .Unknown
+        let tag = ButtonTag(rawValue: sender.tag) ?? .Unknown
         switch tag {
         case .Timeline:
             print("timeline")
@@ -316,10 +316,10 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
         
         _scrollContentView.addSubview(_stackView)
         _stackView.snp_makeConstraints { (make) -> Void in
-            let top = GSVLayoutInfo.topMargin(_fetchCurrentState(false))
+            let top = LayoutInfo.topMargin(_fetchCurrentState(false))
             _contextTopMarginConstraint = make.top.equalTo(_scrollContentView).offset(top).constraint
             make.leading.trailing.bottom.equalTo(_scrollContentView)
-            make.height.equalTo(GSVLayoutInfo.ContentHeight)
+            make.height.equalTo(LayoutInfo.ContentHeight)
         }
     }
     private func _setupNavigationBar() {
@@ -328,9 +328,9 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
         view.addSubview(_navigationBar)
         _navigationBar.snp_makeConstraints { (make) -> Void in
             let state = _fetchCurrentState(false)
-            _navigationBarTopConstraint = make.top.equalTo(view).offset(GSNavigationInfo.topMargin(state)).constraint
+            _navigationBarTopConstraint = make.top.equalTo(view).offset(NavigationInfo.topMargin(state)).constraint
             make.leading.trailing.equalTo(view)
-            make.height.equalTo(GSNavigationInfo.height(state))
+            make.height.equalTo(NavigationInfo.height(state))
         }
         
         let navigationItem = UINavigationItem(title: "")
@@ -370,7 +370,7 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
     }
     
     
-    private func _buttonViewWithImage(image: UIImage, text: String, buttonTag: GSButtonTag) -> UIStackView {
+    private func _buttonViewWithImage(image: UIImage, text: String, buttonTag: ButtonTag) -> UIStackView {
         
         let button = UIButton(type: .Custom)
         button.tag = buttonTag.rawValue
@@ -378,30 +378,30 @@ class GlobalSearchViewController: UISearchController, UISearchBarDelegate, UIGes
         button.addTarget(self, action: "buttonTapped:", forControlEvents: .TouchUpInside)
         let label = UILabel()
         label.text = text
-        label.font = UIFont.systemFontOfSize(GSVLayoutInfo.ContentFontSize)
+        label.font = UIFont.systemFontOfSize(LayoutInfo.ContentFontSize)
         label.textColor = UIColor.grayColor()
         let stackView = UIStackView()
         stackView.axis = .Vertical
         stackView.alignment = .Center
-        stackView.spacing = GSVLayoutInfo.ContentPadding
+        stackView.spacing = LayoutInfo.ContentPadding
         stackView.addArrangedSubview(button)
         stackView.addArrangedSubview(label)
         
         return stackView
     }
     
-    private func _transitionToState(state: GSState) {
+    private func _transitionToState(state: State) {
         
-        _contextTopMarginConstraint!.updateOffset(GSVLayoutInfo.topMargin(state))
-        _navigationBarTopConstraint!.updateOffset(GSNavigationInfo.topMargin(state))
+        _contextTopMarginConstraint!.updateOffset(LayoutInfo.topMargin(state))
+        _navigationBarTopConstraint!.updateOffset(NavigationInfo.topMargin(state))
         UIView.animateWithDuration(0.25) { () -> Void in
             self.view.layoutIfNeeded()
         }
     }
     
-    private func _fetchCurrentState(active: Bool) -> GSState {
+    private func _fetchCurrentState(active: Bool) -> State {
         
-        var state: GSState
+        var state: State
         if tq_isMinimumWindowHeight() {
             state = active ? .ActiveCompact : .InactiveCompact
         } else {
