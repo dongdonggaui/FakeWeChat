@@ -15,7 +15,7 @@ enum MultiSelectTableViewState {
     case Selectable
 }
 
-private let SelectImageInVisibleLeading = CGFloat(-36)
+private let SelectImageInVisibleLeading = CGFloat(-32)
 private let SelectImageVisibleLeading = CGFloat(0)
 
 class MultiSelectTableViewCell: UITableViewCell {
@@ -63,8 +63,8 @@ class MultiSelectTableViewCell: UITableViewCell {
     private let selectImageView = UIImageView()
     private let containerView = UIView()
     private var contentStackLeadingConstraint: Constraint?
-    private let normalIcon = UIImage(color: FlatSand(), size: CGSizeMake(20, 20)).imageByRoundCornerRadius(10)
-    private let selectedIcon = UIImage(color: FlatGreenDark(), size: CGSizeMake(20, 20)).imageByRoundCornerRadius(10)
+    private lazy var normalIcon = UIImage.fontAwesomeIconWithName(.CircleO, textColor: UIColor.flatGreenColor(), size: CGSizeMake(24, 24))
+    private lazy var selectedIcon = UIImage.fontAwesomeIconWithName(.CheckCircle, textColor: UIColor.flatGreenColor(), size: CGSizeMake(24, 24))
     
     // MARK: - Public
     func multiSelectContentView() -> UIView {
@@ -77,17 +77,17 @@ class MultiSelectTableViewCell: UITableViewCell {
     
     // MARK: - Private
     private func multiSelectTableViewCellInit() {
+        
         contentStackView.axis = .Horizontal
         contentStackView.alignment = .Center
         contentStackView.distribution = .Fill
-        contentStackView.spacing = 8
         contentStackView.layoutMargins = UIEdgeInsetsMake(0, 8, 0, 0);
         contentStackView.layoutMarginsRelativeArrangement = true
         contentStackView.addArrangedSubview(selectImageView)
         contentStackView.addArrangedSubview(containerView)
         
         selectImageView.snp_makeConstraints { (make) -> Void in
-            make.size.equalTo(CGSizeMake(20, 20))
+            make.size.equalTo(CGSizeMake(24, 24))
         }
         containerView.snp_makeConstraints { (make) -> Void in
             make.top.bottom.equalTo(contentStackView)
